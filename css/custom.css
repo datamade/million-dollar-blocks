@@ -19,3 +19,22 @@ body {
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+
+
+table {
+  background: #fff;
+  margin-bottom: 1.11111rem;
+  border: solid 1px #ddd; }
+  table tr th, table tr td {
+    padding: 0.3rem 0.55556rem;
+    font-size: 0.77778rem;
+    color: #222;
+    text-align: left;
+  }
+  table tr.even, table tr.alt, table tr:nth-of-type(even) {
+    background: #f9f9f9; 
+  }
+  table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, table tbody tr td, table tr td {
+    display: table-cell;
+    line-height: 1rem; 
+  }
