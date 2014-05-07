@@ -45,4 +45,4 @@ merged_eitc.shp: house_boundaries.table eitc.table
 		JOIN info_by_dist ON house_boundaries.district_1 = cast(info_by_dist.ilhousedist as smallint)"
 
 merged_eitc.geojson: merged_eitc.shp
-	@ogr2ogr -f GeoJSON finished_files/$@ finished_files/$(notdir $?); \
+	@ogr2ogr -simplify 0.0001 -f GeoJSON finished_files/$@ finished_files/$(notdir $?); \
