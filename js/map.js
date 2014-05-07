@@ -7,19 +7,16 @@
     }).addTo(map);
     var info = L.control({position: 'bottomleft'});
     info.onAdd = function(map){
-        this._div = L.DomUtil.create('div', 'eitc-info');
+        this._div = L.DomUtil.create('div', 'info');
         return this._div;
     }
     info.update = function(feature){
-        console.log(feature)
-        //if (typeof eature !== 'undefined'){
-        //    var blob = '<h3>' + councilFeature.properties['COUNCIL_NU'] + '</h3>';
-        //    blob += '<p><strong>Hardest Hit properties: </strong>' + councilFeature.properties['COUNT'] + '</p>';
-        //    $(this._div).html(blob);
-        //} else {
-        //    $(this._div).empty();
-        //    info.removeFrom(map);
-        //}
+        if (typeof feature !== 'undefined'){
+            $(this._div).html(featureInfo(feature.properties));
+        } else {
+            $(this._div).empty();
+            info.removeFrom(map);
+        }
     }
     $.when($.getJSON('data/finished_files/merged_eitc.geojson')).then(
         function(shapes){
@@ -53,22 +50,28 @@
                 boundaries.resetStyle(lastClicked);
             }
             e.target.setStyle({'fillColor':"#762a83"});
-            $('#info').html(featureInfo(feature.properties));
+            info.update(feature);
             map.fitBounds(e.target.getBounds());
             lastClicked = e.target;
         });
+        layer.on('mouseover', function(e){
+            info.addTo(map);
+            info.update(feature);
+        });
+        layer.on('mouseout', function(e){
+            info.update();
+        })
     }
     function featureInfo(properties){
-        var blob = 'Boo!'
-        //var blob = '<div><h3>' + properties['FULL_ADDRE'] + '</h3>';
-        //blob += '<p><strong>PIN: </strong>' + properties['PIN'] + '</p>';
-        //blob += '<p><strong>Deeded Owner: </strong>' + properties['DEEDED_OWN'] + '</p>';
-        //blob += '<p><strong>Back Taxes: </strong>' + accounting.formatMoney(properties['BACK_TAXES']) + '</p>';
+        var blob = '<div><h3>District ' + parseInt(properties['ILHOUSEDIS']) + '</h3>';
+        blob += '<p><strong>Representative: </strong>' + properties['HOUSEREP'] + ' (' + properties['PARTY'] + ')</p>';
+        blob += '<p><strong>EITC Returns: </strong>' + properties['EITC'] + ' (' + Math.round(properties['PCTEITC'] * 100) + '%)</p>';
+        //blob += '<p><strong>: </strong>' + accounting.formatMoney(properties['BACK_TAXES']) + '</p>';
         //blob += '<p><strong>Property Status: </strong>' + properties['PROPERTY_S'] + '</p>';
         //blob += '<p><strong>Demolition Estimate: </strong>' + accounting.formatMoney(properties['CITY_ESTIM']) + '</p>';
         //blob += '<p><strong>Neighborhood: </strong>' + properties['NEIGHBORHO'] + '</p>';
         //blob += '<p><strong>Council District: </strong>' + properties[' COUNCIL_D'] + '</p>';
-        //blob += '</div>';
+        blob += '</div>';
         return blob
     }
 })()
