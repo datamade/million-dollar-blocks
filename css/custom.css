@@ -1,12 +1,45 @@
 body {
-    margin: 0;
-    font-family:'Montserrat',sans-serif;
+  padding-top: 50px;
+  font-size: 18px;
 }
 
-#map {
-    height: 100%;
+a, a:hover {
+color: #346983;
 }
 
+.navbar-header>.navbar-brand, .navbar-inverse .navbar-nav>li>a {color: #346983; margin-top: 7px;}
+
+#map { width: 100%; height: 600px;}
+
+.leaflet-google-layer{
+    z-index: 0;
+}
+.leaflet-map-pane{
+    z-index: 100;
+}
+
+.leaflet-google-layer .leaflet-zoom-anim, .leaflet-google-layer .leaflet-zoom-animated {
+    transition-property: none!important;
+    -webkit-transition-property: none!important;
+    -webkit-animation: none!important;
+    animation: none!important;
+}
+
+#search_address {
+    width: 500px;
+}
+
+.btn-primary {
+    background-color: #333;
+    border-color: #333;
+    text-transform: none;
+    font-size: 15px;
+}
+
+.btn-primary:hover {
+    background-color: #555;
+    border-color: #555;
+}
 
 .info.leaflet-control {
     font-family:'Montserrat',sans-serif;
@@ -23,21 +56,20 @@ body {
 
 table {
   background: #fff;
-  margin-bottom: 1.11111rem;
-  border: solid 1px #ddd; }
-  table tr th, table tr td {
-    padding: 0.3rem 0.55556rem;
-    font-size: 0.77778rem;
-    color: #222;
-    text-align: left;
-  }
-  table tr.even, table tr.alt, table tr:nth-of-type(even) {
-    background: #f9f9f9;
-  }
-  table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, table tbody tr td, table tr td {
-    display: table-cell;
-    line-height: 1rem;
-  }
+  border: solid 1px #ddd;
+}
+
+table tr th, table tr td {
+  color: #222;
+  text-align: left;
+  padding: 5px 7px;
+}
+table tr.even, table tr.alt, table tr:nth-of-type(even) {
+  background: #f9f9f9;
+}
+table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, table tbody tr td, table tr td {
+  display: table-cell;
+}
 
 .legend {
     line-height: 18px;

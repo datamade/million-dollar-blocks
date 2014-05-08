@@ -1,10 +1,20 @@
 (function(){
     var lastClicked;
     var boundaries;
-    var map = L.map('map').fitBounds([[36.970298, -87.495199],[42.5083380000001,-91.5130789999999]]);
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
-        attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
-    }).addTo(map);
+    var marker;
+    var map = L.map('map')
+        .fitBounds([[36.970298, -87.495199],[42.5083380000001,-91.5130789999999]]);
+    var googleLayer = new L.Google('ROADMAP', {animate: false});
+    map.addLayer(googleLayer);
+    map.on('zoomstart', function(e){
+        map.removeLayer(boundaries);
+    })
+    google.maps.event.addListener(googleLayer._google, 'idle', function(e){
+        map.addLayer(boundaries);
+    })
+    //L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
+    //    attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+    //}).addTo(map);
     var info = L.control({position: 'bottomleft'});
     info.onAdd = function(map){
         this._div = L.DomUtil.create('div', 'info');
@@ -40,7 +50,6 @@
         for (var i = 0; i < grades.length; i++) {
             from = grades[i];
             to = grades[i + 1];
-            console.log(getColor(from + 0.01))
             labels.push(
                 '<i style="background-color:' + getColor(from + 0.01) + '"></i> ' +
                 from + (to ? '&ndash;' + to + "%" : "%" + '+'));
@@ -58,7 +67,6 @@
             jenks_cutoffs = jenks(all_values, 4);
             jenks_cutoffs[0] = 0; // ensure the bottom value is 0
             jenks_cutoffs.pop(); // last item is the max value, so dont use it
-            console.log(jenks_cutoffs)
 
             boundaries = L.geoJson(shapes, {
                 style: style,
@@ -68,13 +76,24 @@
         }
     );
 
+    $('#search_address').geocomplete()
+        .bind('geocode:result', function(event, result){
+            if (typeof marker !== 'undefined'){
+                map.removeLayer(marker);
+            }
+            var lat = result.geometry.location.lat();
+            var lng = result.geometry.location.lng();
+            marker = L.marker([lat, lng]).addTo(map);
+            map.setView([lat, lng], 17);
+        });
+
     function style(feature){
         var style = {
             "color": "white",
             "fillColor": getColor(feature.properties['PCTEITC'] * 100),
-            "opacity": 0.5,
+            "opacity": 0.4,
             "weight": 1,
-            "fillOpacity": 0.7,
+            "fillOpacity": 0.6,
         }
         return style;
     }
@@ -94,17 +113,18 @@
                 boundaries.resetStyle(lastClicked);
             }
             e.target.setStyle({'fillColor':"#762a83"});
-            info.update(feature);
+            //info.update(feature);
+            $('#district-info').html(featureInfo(feature.properties));
             map.fitBounds(e.target.getBounds());
             lastClicked = e.target;
         });
-        layer.on('mouseover', function(e){
-            info.addTo(map);
-            info.update(feature);
-        });
-        layer.on('mouseout', function(e){
-            info.update();
-        })
+        //layer.on('mouseover', function(e){
+        //    info.addTo(map);
+        //    info.update(feature);
+        //});
+        //layer.on('mouseout', function(e){
+        //    info.update();
+        //})
     }
     function featureInfo(properties){
         var blob = '<div>\

@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" style="height: 100%"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,18 +10,110 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/normalize.css">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.css" rel="stylesheet">
 
         <link media="all" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%27+rel%3D%27stylesheet%27+type%3D%27text%2Fcss%27&amp;ver=3.8.1" id="velocity_googlefont_style-css" rel="stylesheet">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/custom.css">
         <script src="js/modernizr-2.6.2.min.js"></script>
     </head>
-    <body style="height: 100%">
-        <div id="map"></div>
+    <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class='navbar-brand' href="/">Earned Income Tax Credit</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+            <li><a href="#address-search">Search</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <div class='col-md-12'>
+        <div class='row'>
+
+          <br /><br />
+          <div class='col-md-8' id='address-search'>
+            <p>
+              <form class='form-inline hidden-print'>
+                <input class='form-control input-lg' id='search_address' placeholder='Enter your address' type='text' />
+                <input class='btn btn-primary btn-lg' id='search' type='button' value='Search' />
+              </form>
+            </p>
+          </div>
+
+          <div class='col-md-8'>
+            <div id='map'></div>
+          </div>
+          <div class='col-md-4'>
+            <div class='well' id='district-info'>
+              <p>To get started:</p>
+
+              <ol>
+                <li>Enter your address to view your congressional district</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-md-8 steps'>
+            <hr />
+            <h2 id='about'>About</h2>
+            <!-- <p><strong>ChicagoLots.org</strong> was built by <a href='http://datamade.us'>DataMade</a> and is based on <a href='http://largelots.org'>LargeLots.org</a>, an app we built in partnership with <a href='http://www.teamworkenglewood.org'>Teamwork Englewood</a> and <a href='http://www.lisc-chicago.org/'>LISC Chicago</a>.</p>
+
+            <p>Our map was built using open data from <a href='https://data.cityofchicago.org/'>Chicago</a> and <a href='https://datacatalog.cookcountyil.gov/'>Cook County</a>:</p>
+
+            <ul>
+              <li><a href='https://data.cityofchicago.org/Community-Economic-Development/City-Owned-Land-Inventory/aksk-kvfp'>Chicago - City Owned Land Inventory</a></li>
+              <li><a href='https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Wards/bhcv-wqkf'>Chicago - Wards</a></li>
+              <li><a href='https://datacatalog.cookcountyil.gov/GIS-Maps/ccgisdata-Parcel-2012/e62c-6rz8'>Cook County - 2012 Parcels</a></li>
+            </ul>
+
+            <p>We prepared some extracts of the above sources for this project. You can download those here:</p>
+
+            <ul>
+                <li>Complete listing of lots displayed in the map (<a href="#">CSV</a>)</li>
+                <li>Geospatial definitions of the lots displayed above (<a href="#">Shapefile</a>)</li>
+            </ul>
+
+            <p>All the code for this site is open source and <a href='https://github.com/datamade/chicago-lots'>available on Github</a>. We used the following open source tools:</p>
+
+            <ul>
+              <li><a href='http://www.qgis.org/en/site/'>QGIS</a> - graphic information system (GIS) desktop application</li>
+              <li><a href='http://postgis.net/'>PostGIS</a> - geospatial database</li>
+              <li><a href='http://getbootstrap.com/'>Bootstrap</a> - Responsive HTML, CSS and Javascript framework</li>
+              <li><a href='http://leafletjs.com/'>Leaflet</a> - javascript library interactive maps</li>
+              <li><a href='http://cartodb.com'>CartoDB</a> - platform for rendering interactive map tiles</li>
+              <li><a href='https://github.com/asual/jquery-address'>jQuery Address</a> - javascript library creating RESTful URLs</li>
+            </ul> -->
+
+          </div>
+        </div>
+
+        <div class="footer">
+          <p class='pull-right'>&copy; <a href='http://datamade.us'>DataMade</a></p>
+        </div>
+      </div>
+    </div> <!-- /container -->
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
+        <script src="js/jquery.geocomplete.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script src="js/accounting.min.js"></script>
         <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-google.js"></script>
         <script src="js/jenks.js"></script>
         <script src="js/map.js"></script>
 
