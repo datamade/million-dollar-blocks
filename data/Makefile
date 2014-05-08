@@ -1,7 +1,12 @@
 VPATH = raw:finished_files:build
 include config.mk
 
-GENERATED_FILES = ''
+GENERATED_FILES = 'house_boundaries.shp \
+eitc.csv \
+eitc.table \
+house_boundaries.table \
+merged_eitc.shp \
+merged_eitc.geojson'
 
 .PHONY: all clean full_clean
 
@@ -12,8 +17,7 @@ full_clean:
 	rm -Rf build/*
 	rm -Rf finished_files/*
 
-all:
-	@echo "Nothing to build here yet"
+all: $(GENERATED_FILES)
 
 house_boundaries.shp:
 	wget -O raw/house_and_senate.zip http://ilhousedems.com/redistricting/2011-maps/Legislative_Districts_Public_Act/House%20and%20Senate%20shape%20files.zip
@@ -27,9 +31,10 @@ house_boundaries.shp:
 
 eitc.csv:
 	in2csv --sheet "State EITC Data by IL Leg House" \
-		raw/"IL EITC Data by State House Legislative District.xlsx" > build/$@
+		raw/"IL EITC Data by State House Legislative District v2.xlsx" > build/$@
 
 eitc.table: eitc.csv
+	psql -d $(PG_DB) -U $(PG_USER) -h $(PG_HOST) -p $(PG_PORT) -c "DROP TABLE IF EXISTS info_by_dist"
 	csvsql build/$(notdir $?) \
 		--db "postgresql://$(PG_USER):@$(PG_HOST):$(PG_PORT)/$(PG_DB)" --table info_by_dist --insert
 	@touch build/$@
