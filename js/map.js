@@ -85,6 +85,8 @@
             var lng = result.geometry.location.lng();
             marker = L.marker([lat, lng]).addTo(map);
             map.setView([lat, lng], 17);
+            var district = leafletPip.pointInLayer([lng, lat], boundaries);
+            district[0].fire('click');
         });
 
     function style(feature){
