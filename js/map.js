@@ -67,12 +67,19 @@
             jenks_cutoffs = jenks(all_values, 4);
             jenks_cutoffs[0] = 0; // ensure the bottom value is 0
             jenks_cutoffs.pop(); // last item is the max value, so dont use it
-
             boundaries = L.geoJson(shapes, {
                 style: style,
                 onEachFeature: boundaryClick
             }).addTo(map);
             legend.addTo(map);
+            var district = $.address.parameter('district');
+            if (district && !address){
+                boundaries.eachLayer(function(layer){
+                    if(layer.feature.properties['ILHOUSEDIS'] == district){
+                        layer.fire('click');
+                    }
+                })
+            }
         }
     );
 
@@ -86,8 +93,19 @@
             marker = L.marker([lat, lng]).addTo(map);
             map.setView([lat, lng], 17);
             var district = leafletPip.pointInLayer([lng, lat], boundaries);
+            if (result.types.indexOf('street_address') >= 0){
+                $.address.parameter('address', encodeURI(result.formatted_address));
+            } else {
+                $.address.parameter('address', encodeURI(result.name));
+            }
             district[0].fire('click');
         });
+
+    var address = convertToPlainString($.address.parameter('address'));
+    if(address){
+        $("#search_address").val(address);
+        $('#search_address').geocomplete('find', address)
+    }
 
     function style(feature){
         var style = {
@@ -115,18 +133,11 @@
                 boundaries.resetStyle(lastClicked);
             }
             e.target.setStyle({'fillColor':"#762a83"});
-            //info.update(feature);
             $('#district-info').html(featureInfo(feature.properties));
             map.fitBounds(e.target.getBounds());
             lastClicked = e.target;
+            $.address.parameter('district', feature.properties['ILHOUSEDIS'])
         });
-        //layer.on('mouseover', function(e){
-        //    info.addTo(map);
-        //    info.update(feature);
-        //});
-        //layer.on('mouseout', function(e){
-        //    info.update();
-        //})
     }
     function featureInfo(properties){
         var blob = '<div>\
@@ -135,15 +146,11 @@
               <tbody>\
                 <tr>\
                     <td>Representative</td>\
-                    <td>' + properties['HOUSEREP'] + '</td>\
+                    <td>' + properties['HOUSEREP'] + ' (' + properties['PARTY'] + ')' + '</td>\
                 </tr>\
                 <tr>\
-                    <td>EITC returns</td>\
+                    <td>State EITC returns (2012)</td>\
                     <td>' + properties['EITC'] + ' (' + Math.round(properties['PCTEITC'] * 100) + '%)</td>\
-                </tr>\
-                <tr>\
-                    <td>Party</td>\
-                    <td>' + properties['PARTY'] + '</td>\
                 </tr>\
                 <tr>\
                     <td>EITC 10% (current)</td>\
@@ -161,5 +168,9 @@
             </table>\
             </div>';
         return blob
+    }
+    function convertToPlainString(text) {
+      if (text == undefined) return '';
+      return decodeURIComponent(text);
     }
 })()
