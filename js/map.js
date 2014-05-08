@@ -28,6 +28,27 @@
     ]
 
     var jenks_cutoffs = []
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+            grades = jenks_cutoffs,
+            labels = [],
+            from, to;
+
+        for (var i = 0; i < grades.length; i++) {
+            from = grades[i];
+            to = grades[i + 1];
+            console.log(getColor(from + 0.01))
+            labels.push(
+                '<i style="background-color:' + getColor(from + 0.01) + '"></i> ' +
+                from + (to ? '&ndash;' + to + "%" : "%" + '+'));
+        }
+
+        div.innerHTML = "<div><strong>EITC percent</strong><br>" + labels.join('<br>') + '</div>';
+        return div;
+    };
     $.when($.getJSON('data/finished_files/merged_eitc.geojson')).then(
         function(shapes){
             var all_values = []
@@ -43,32 +64,9 @@
                 style: style,
                 onEachFeature: boundaryClick
             }).addTo(map);
+            legend.addTo(map);
         }
     );
-
-    var legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = jenks_cutoffs,
-            labels = [],
-            from, to;
-
-        for (var i = 0; i < grades.length; i++) {
-            from = grades[i];
-            to = grades[i + 1];
-
-            labels.push(
-                '<i style="background:' + getColor(from + 0.01) + '"></i> ' +
-                from + (to ? '&ndash;' + to + "%" : "%" + '+'));
-        }
-
-        div.innerHTML = "<strong>EITC percent</strong><br>" + labels.join('<br>');
-        return div;
-    };
-
-    legend.addTo(map);
 
     function style(feature){
         var style = {
@@ -83,10 +81,10 @@
 
     // get color depending on condition_title
     function getColor(d) {
-        return  d >= jenks_cutoffs[3] ? map_colors[0] : 
-                d >= jenks_cutoffs[2] ? map_colors[1] : 
-                d >= jenks_cutoffs[1] ? map_colors[2] : 
-                d >= jenks_cutoffs[0] ? map_colors[3] :  
+        return  d >= jenks_cutoffs[3] ? map_colors[0] :
+                d >= jenks_cutoffs[2] ? map_colors[1] :
+                d >= jenks_cutoffs[1] ? map_colors[2] :
+                d >= jenks_cutoffs[0] ? map_colors[3] :
                                         map_colors[4];
     }
 
