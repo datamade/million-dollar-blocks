@@ -28,12 +28,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class='navbar-brand' href="/">Earned Income Tax Credit</a>
+          <a class='navbar-brand' href="/">EITC Works!</a>
         </div>
         <div class="collapse navbar-collapse">
+          <span class='navbar-text'>Lifting working families, Boosting local economies</span>
           <ul class="nav navbar-nav pull-right">
-            <li><a href="#address-search">Search</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#">Statewide stats</a></li>
+            <li><a href="#">What is EITC?</a></li>
+            <li><a href="#">Take action!</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -43,9 +45,11 @@
       <div class='col-md-12'>
         <div class='row'>
 
-          <div class='col-md-6' id='address-search'>
+          <div class='col-md-12' id='address-search'>
           <br /><br />
-          <p class='lead'>Earn Income Tax Credit tagline goes here</p>
+          <p>The <a href='http://en.wikipedia.org/wiki/Earned_income_tax_credit'>Earned Income Tax Credit</a> (EITC) helps people who work but struggle to get by on low wages, while also reducing poverty, increasing tax fairness, and boosting local economies across the state. Doubling the Illinois Earned Income Tax Credit (EITC) from 10 to 20% of the federal EITC is one of the best investments Illinois can make.</p>
+
+          <p>Enter your address below to find out how the EITC Works in your legislative district.</p>
             <p>
               <form class='form-inline hidden-print'>
                 <input class='form-control input-lg' id='search_address' placeholder='Enter your address' type='text' />
@@ -60,46 +64,64 @@
           </div>
           <div class='col-md-6'>
             <div class='well' id='district-info'>
-              <p>To get started:</p>
+              <h3>State of Illinois, Tax Year 2012</h3>
 
-              <ol>
-                <li>Enter your address to view your congressional district</li>
-              </ol>
+              <table class='table'>
+                <tbody>
+                    <tr>
+                        <td>Median income of recipients</td>
+                        <td>$13,436</td>
+                    </tr>
+                    <tr>
+                        <td>Households receiving EITC</td>
+                        <td>902,196</td>
+                    </tr>
+                    <tr>
+                        <td>Children in EITC households</td>
+                        <td>1,231,155</td>
+                    </tr>
+                </tbody>
+              </table>
+              
+              <h3>Statewide Impact</h3>
+              <table class='table'>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Now (10%)</th>
+                        <th>With expansion (20%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Average boost to working families' income</td>
+                        <td>XX</td>
+                        <td>YY</td>
+                    </tr>
+                    <tr>
+                        <td>Annual boost to Illinois economy</td>
+                        <td>XX</td>
+                        <td>YY</td>
+                    </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
         <div class='row'>
           <div class='col-md-8 steps'>
             <hr />
-            <h2 id='about'>About</h2>
-            <!-- <p><strong>ChicagoLots.org</strong> was built by <a href='http://datamade.us'>DataMade</a> and is based on <a href='http://largelots.org'>LargeLots.org</a>, an app we built in partnership with <a href='http://www.teamworkenglewood.org'>Teamwork Englewood</a> and <a href='http://www.lisc-chicago.org/'>LISC Chicago</a>.</p>
+            <h2 id='about'>Notes</h2>
 
-            <p>Our map was built using open data from <a href='https://data.cityofchicago.org/'>Chicago</a> and <a href='https://datacatalog.cookcountyil.gov/'>Cook County</a>:</p>
+            <p>All participation estimates are based on federal EITC data from Tax Year 2012, assuming a 90% participation rate for the state EITC. Economic activity estimates are based on an assumed multiplier effect of $1.50. Sources of federal data:</p>
 
             <ul>
-              <li><a href='https://data.cityofchicago.org/Community-Economic-Development/City-Owned-Land-Inventory/aksk-kvfp'>Chicago - City Owned Land Inventory</a></li>
-              <li><a href='https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Wards/bhcv-wqkf'>Chicago - Wards</a></li>
-              <li><a href='https://datacatalog.cookcountyil.gov/GIS-Maps/ccgisdata-Parcel-2012/e62c-6rz8'>Cook County - 2012 Parcels</a></li>
+                <li>Brookings Tax Year 2012 EITC Interactive</li>
+                <li>Characteristics of EITC-Eligible Tax Units in 2012 by State (Metropolitan Policy Program at Brookings)</li>
+                <li>EITC Table from IRS Compliance Data Warehouse, Tax Year 2012</li>
             </ul>
 
-            <p>We prepared some extracts of the above sources for this project. You can download those here:</p>
-
-            <ul>
-                <li>Complete listing of lots displayed in the map (<a href="#">CSV</a>)</li>
-                <li>Geospatial definitions of the lots displayed above (<a href="#">Shapefile</a>)</li>
-            </ul>
-
-            <p>All the code for this site is open source and <a href='https://github.com/datamade/chicago-lots'>available on Github</a>. We used the following open source tools:</p>
-
-            <ul>
-              <li><a href='http://www.qgis.org/en/site/'>QGIS</a> - graphic information system (GIS) desktop application</li>
-              <li><a href='http://postgis.net/'>PostGIS</a> - geospatial database</li>
-              <li><a href='http://getbootstrap.com/'>Bootstrap</a> - Responsive HTML, CSS and Javascript framework</li>
-              <li><a href='http://leafletjs.com/'>Leaflet</a> - javascript library interactive maps</li>
-              <li><a href='http://cartodb.com'>CartoDB</a> - platform for rendering interactive map tiles</li>
-              <li><a href='https://github.com/asual/jquery-address'>jQuery Address</a> - javascript library creating RESTful URLs</li>
-            </ul> -->
-
+            <p>For additional questions on methodology, contact Lisa Christensen Gee at <a href='mailto:lchristensengee@voices4kids.org'>lchristensengee@voices4kids.org</a>.</p>
           </div>
         </div>
 

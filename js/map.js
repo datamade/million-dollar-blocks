@@ -29,15 +29,6 @@
         }
     }
 
-    var map_colors = [
-        '#e41a1c',
-        '#377eb8',
-        '#4daf4a',
-        '#984ea3',
-        '#ff7f00',
-        '#ffff33'
-    ]
-
     $.when($.getJSON('data/finished_files/merged_eitc.geojson')).then(
         function(shapes){
             
@@ -92,11 +83,6 @@
         return style;
     }
 
-    // get color depending on condition_title
-    function getColor(d) {
-        return map_colors[(d % map_colors.length)];
-    }
-
     function boundaryClick(feature, layer){
         layer.on('click', function(e){
             if(typeof lastClicked !== 'undefined'){
@@ -104,7 +90,7 @@
             }
             e.target.setStyle({'fillColor':"#762a83"});
             $('#district-info').html(featureInfo(feature.properties));
-            map.fitBounds(e.target.getBounds());
+            map.fitBounds(e.target.getBounds(), {padding: [50,50]});
             lastClicked = e.target;
             $.address.parameter('district', feature.properties['ILHOUSEDIS'])
         });
@@ -117,37 +103,62 @@
         })
     }
     function featureInfo(properties){
-        var blob = '<div>\
-            <h3>District ' + parseInt(properties['ILHOUSEDIS']) + '</h3>\
-            <table>\
+        var blob = "<div>\
+            <p><a href='index.html'>&laquo; back to State view</a></p>\
+            <h3>" + properties['HOUSEREP'] + " (" + properties['PARTY'] + "), Illinois House District " + parseInt(properties['ILHOUSEDIS']) + "</h3>\
+            <table class='table'>\
               <tbody>\
-                <tr>\
-                    <td>Representative</td>\
-                    <td>' + properties['HOUSEREP'] + ' (' + properties['PARTY'] + ')' + '</td>\
-                </tr>\
-                <tr>\
-                    <td>State EITC returns (2012)</td>\
-                    <td>' + properties['EITC'] + ' (' + Math.round(properties['PCTEITC'] * 100) + '%)</td>\
-                </tr>\
-                <tr>\
-                    <td>EITC 10% (current)</td>\
-                    <td>' + properties['AVGEITC10'] + '</td>\
-                </tr>\
-                <tr>\
-                    <td>EITC 20% (expanded)</td>\
-                    <td>' + properties['AVGEITC20'] + '</td>\
-                </tr>\
-                <tr>\
-                    <td>ETIC multiplier</td>\
-                    <td>' + accounting.formatMoney(properties['MULTEFFECT']) + 'M</td>\
-                </tr>\
+                  <tr>\
+                      <td>Households receiving EITC</td>\
+                      <td>" + addCommas(properties['EITC']) + "</td>\
+                  </tr>\
+                  <tr>\
+                      <td>Children in EITC households</td>\
+                      <td>" + addCommas(properties['KIDEITC']) + "</td>\
+                  </tr>\
               </tbody>\
             </table>\
-            </div>';
+            <h3>Local Impact</h3>\
+            <table class='table'>\
+              <thead>\
+                  <tr>\
+                      <th></th>\
+                      <th>Now&nbsp;(10%)</th>\
+                      <th>With&nbsp;expansion&nbsp;(20%)</th>\
+                  </tr>\
+              </thead>\
+              <tbody>\
+                  <tr>\
+                      <td>Average boost to working families' income</td>\
+                      <td>" + addCommas(properties['AVGEITC10']) + "</td>\
+                      <td>" + addCommas(properties['AVGEITC20']) + "</td>\
+                  </tr>\
+                  <tr>\
+                      <td>Annual boost to Illinois economy</td>\
+                      <td>" + addCommas(properties['KIDAVGEITC']) + "</td>\
+                      <td>" + addCommas(properties['KIDAVGE_01']) + "</td>\
+                  </tr>\
+              </tbody>\
+            </table>\
+            <p><a class='btn btn-primary' href='#'><i class='icon-download'></i> Download district profile</a></p>\
+            <p><a class='btn btn-primary' href='#'><i class='icon-bullhorn'></i> Tell your lawmaker EITC works!</a></p>\
+            </div>";
         return blob
     }
     function convertToPlainString(text) {
       if (text == undefined) return '';
       return decodeURIComponent(text);
     }
+
+    function addCommas(nStr) {
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+          x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+      }
 })()
