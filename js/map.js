@@ -130,13 +130,13 @@
               <tbody>\
                   <tr>\
                       <td>Average boost to working families' income</td>\
-                      <td>" + addCommas(properties['AVGEITC10']) + "</td>\
-                      <td>" + addCommas(properties['AVGEITC20']) + "</td>\
+                      <td>" + accounting.formatMoney(properties['AVGEITC10'], {precision: 0}) + "</td>\
+                      <td>" + accounting.formatMoney(properties['AVGEITC20'], {precision: 0}) + "</td>\
                   </tr>\
                   <tr>\
-                      <td>Annual boost to Illinois economy</td>\
-                      <td>" + addCommas(properties['KIDAVGEITC']) + "</td>\
-                      <td>" + addCommas(properties['KIDAVGE_01']) + "</td>\
+                      <td>Annual boost to local economy</td>\
+                      <td>" + accounting.formatMoney(properties['KIDAVGEITC'], {precision: 0}) + "M</td>\
+                      <td>" + accounting.formatMoney(properties['KIDAVGE_01'], {precision: 0}) + "M</td>\
                   </tr>\
               </tbody>\
             </table>\
