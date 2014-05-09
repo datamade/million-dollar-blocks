@@ -8,9 +8,15 @@
     map.addLayer(googleLayer);
     map.on('zoomstart', function(e){
         map.removeLayer(boundaries);
+        if (typeof marker !== 'undefined'){
+            map.removeLayer(marker);
+        }
     })
     google.maps.event.addListener(googleLayer._google, 'idle', function(e){
         map.addLayer(boundaries);
+        if (typeof marker !== 'undefined'){
+            map.addLayer(marker);
+        }
     })
     //L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
     //    attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
@@ -20,21 +26,13 @@
         this._div = L.DomUtil.create('div', 'info');
         return this._div;
     }
-    info.update = function(feature){
-        if (typeof feature !== 'undefined'){
-            $(this._div).html(featureInfo(feature.properties));
-        } else {
-            $(this._div).empty();
-            info.removeFrom(map);
-        }
-    }
 
     $.when($.getJSON('data/finished_files/merged_eitc.geojson')).then(
         function(shapes){
             
             boundaries = L.geoJson(shapes, {
                 style: style,
-                onEachFeature: boundaryClick
+                onEachFeature: onEachFeature
             }).addTo(map);
 
             var district = $.address.parameter('district');
@@ -58,11 +56,8 @@
             marker = L.marker([lat, lng]).addTo(map);
             map.setView([lat, lng], 17);
             var district = leafletPip.pointInLayer([lng, lat], boundaries);
-            if (result.types.indexOf('street_address') >= 0){
-                $.address.parameter('address', encodeURI(result.formatted_address));
-            } else {
-                $.address.parameter('address', encodeURI(result.name));
-            }
+            
+            $.address.parameter('address', encodeURI($('#search_address').val()));
             district[0].fire('click');
         });
 
@@ -83,7 +78,7 @@
         return style;
     }
 
-    function boundaryClick(feature, layer){
+    function onEachFeature(feature, layer){
         layer.on('click', function(e){
             if(typeof lastClicked !== 'undefined'){
                 boundaries.resetStyle(lastClicked);
@@ -101,6 +96,9 @@
         layer.on('mouseout', function(e){
           layer.setStyle({weight: 1})
         })
+
+        var labelText = feature.properties['HOUSEREP'] + " (" + feature.properties['PARTY'] + ")<br />Illinois House District " + parseInt(feature.properties['ILHOUSEDIS']);
+        layer.bindLabel(labelText);
     }
     function featureInfo(properties){
         var blob = "<div>\
