@@ -2,7 +2,7 @@
     var lastClicked;
     var boundaries;
     var marker;
-    var map = L.map('map')
+    var map = L.map('map', {minZoom: 6})
         .fitBounds([[36.970298, -87.495199],[42.5083380000001,-91.5130789999999]]);
     var googleLayer = new L.Google('ROADMAP', {animate: false});
     map.addLayer(googleLayer);
@@ -30,48 +30,22 @@
     }
 
     var map_colors = [
-        '#006d2c',
-        '#31a354',
-        '#74c476',
-        '#a1d99b',
-        '#c7e9c0'
+        '#e41a1c',
+        '#377eb8',
+        '#4daf4a',
+        '#984ea3',
+        '#ff7f00',
+        '#ffff33'
     ]
 
-    var jenks_cutoffs = []
-    var legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = jenks_cutoffs,
-            labels = [],
-            from, to;
-
-        for (var i = 0; i < grades.length; i++) {
-            from = grades[i];
-            to = grades[i + 1];
-            labels.push(
-                '<i style="background-color:' + getColor(from + 0.01) + '"></i> ' +
-                from + (to ? '&ndash;' + to + "%" : "%" + '+'));
-        }
-
-        div.innerHTML = "<div><strong>EITC percent</strong><br>" + labels.join('<br>') + '</div>';
-        return div;
-    };
     $.when($.getJSON('data/finished_files/merged_eitc.geojson')).then(
         function(shapes){
-            var all_values = []
-            $.each(shapes.features, function(k, v){
-                all_values.push(v.properties['PCTEITC'] * 100);
-            });
-            jenks_cutoffs = jenks(all_values, 4);
-            jenks_cutoffs[0] = 0; // ensure the bottom value is 0
-            jenks_cutoffs.pop(); // last item is the max value, so dont use it
+            
             boundaries = L.geoJson(shapes, {
                 style: style,
                 onEachFeature: boundaryClick
             }).addTo(map);
-            legend.addTo(map);
+
             var district = $.address.parameter('district');
             if (district && !address){
                 boundaries.eachLayer(function(layer){
@@ -110,8 +84,8 @@
     function style(feature){
         var style = {
             "color": "white",
-            "fillColor": getColor(feature.properties['PCTEITC'] * 100),
-            "opacity": 0.4,
+            "fillColor": "#0570b0",
+            "opacity": 1,
             "weight": 1,
             "fillOpacity": 0.6,
         }
@@ -120,11 +94,7 @@
 
     // get color depending on condition_title
     function getColor(d) {
-        return  d >= jenks_cutoffs[3] ? map_colors[0] :
-                d >= jenks_cutoffs[2] ? map_colors[1] :
-                d >= jenks_cutoffs[1] ? map_colors[2] :
-                d >= jenks_cutoffs[0] ? map_colors[3] :
-                                        map_colors[4];
+        return map_colors[(d % map_colors.length)];
     }
 
     function boundaryClick(feature, layer){
@@ -138,6 +108,13 @@
             lastClicked = e.target;
             $.address.parameter('district', feature.properties['ILHOUSEDIS'])
         });
+
+        layer.on('mouseover', function(e){
+          layer.setStyle({weight: 5})
+        });
+        layer.on('mouseout', function(e){
+          layer.setStyle({weight: 1})
+        })
     }
     function featureInfo(properties){
         var blob = '<div>\
