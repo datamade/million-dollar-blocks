@@ -123,8 +123,8 @@
               <thead>\
                   <tr>\
                       <th></th>\
-                      <th>Now&nbsp;(10%)</th>\
-                      <th>With&nbsp;expansion&nbsp;(20%)</th>\
+                      <th>Now (10%)</th>\
+                      <th>With expansion (20%)</th>\
                   </tr>\
               </thead>\
               <tbody>\
