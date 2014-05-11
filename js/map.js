@@ -139,7 +139,7 @@
               </tbody>\
             </table>\
             <p><a class='btn btn-primary' href='#'><i class='icon-download'></i> Download district profile</a></p>\
-            <p><a class='btn btn-primary' href='#'><i class='icon-bullhorn'></i> Tell your lawmaker EITC works!</a></p>\
+            <p><a class='btn btn-primary' href='http://salsa4.salsalabs.com/o/50920/p/dia/action3/common/public/?action_KEY=10927'><i class='icon-bullhorn'></i> Tell your lawmaker EITC works!</a></p>\
             </div>";
         return blob
     }
