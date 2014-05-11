@@ -7,6 +7,11 @@ a, a:hover {
 color: #0570b0;
 }
 
+.notes p, .notes li {
+  color: #999;
+  font-size: .8em;
+}
+
 .navbar-brand { font-size: 30px;}
 .navbar-header>.navbar-brand, .navbar-inverse .navbar-nav>li>a {color: #0570b0;}
 
