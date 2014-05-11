@@ -101,9 +101,11 @@
         layer.bindLabel(labelText);
     }
     function featureInfo(properties){
+
+        var district = parseInt(properties['ILHOUSEDIS']);
         var blob = "<div>\
             <p><a href='index.html'>&laquo; back to State view</a></p>\
-            <h3>" + properties['HOUSEREP'] + " (" + properties['PARTY'] + "), Illinois House District " + parseInt(properties['ILHOUSEDIS']) + "</h3>\
+            <h3>" + properties['HOUSEREP'] + " (" + properties['PARTY'] + "), Illinois House District " + district + "</h3>\
             <table class='table'>\
               <tbody>\
                   <tr>\
@@ -138,7 +140,7 @@
                   </tr>\
               </tbody>\
             </table>\
-            <p><a class='btn btn-primary' href='#'><i class='icon-download'></i> Download district profile</a></p>\
+            <p><a class='btn btn-primary' href='docs/EITC Legislative Fact Sheets FINAL " + district + ".pdf'><i class='icon-download'></i> Download district profile</a></p>\
             <p><a class='btn btn-primary' href='http://salsa4.salsalabs.com/o/50920/p/dia/action3/common/public/?action_KEY=10927'><i class='icon-bullhorn'></i> Tell your lawmaker EITC works!</a></p>\
             </div>";
         return blob
