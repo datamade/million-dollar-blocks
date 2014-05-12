@@ -83,7 +83,7 @@
             if(typeof lastClicked !== 'undefined'){
                 boundaries.resetStyle(lastClicked);
             }
-            e.target.setStyle({'fillColor':"#762a83"});
+            e.target.setStyle({'fillColor':"#90BE44"});
             $('#district-info').html(featureInfo(feature.properties));
             map.fitBounds(e.target.getBounds(), {padding: [50,50]});
             lastClicked = e.target;
