@@ -18,9 +18,16 @@
             map.addLayer(marker);
         }
     })
-    //L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
-    //    attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
-    //}).addTo(map);
+    google.maps.event.addListenerOnce(googleLayer._google, 'idle', function(e){
+        var district = $.address.parameter('district');
+        if (district && !address){
+            boundaries.eachLayer(function(layer){
+                if(layer.feature.properties['ILHOUSEDIS'] == district){
+                    layer.fire('click');
+                }
+            })
+        }
+    })
     var info = L.control({position: 'bottomleft'});
     info.onAdd = function(map){
         this._div = L.DomUtil.create('div', 'info');
@@ -29,20 +36,12 @@
 
     $.when($.getJSON('data/finished_files/merged_eitc.geojson')).then(
         function(shapes){
-            
+
             boundaries = L.geoJson(shapes, {
                 style: style,
                 onEachFeature: onEachFeature
             }).addTo(map);
 
-            var district = $.address.parameter('district');
-            if (district && !address){
-                boundaries.eachLayer(function(layer){
-                    if(layer.feature.properties['ILHOUSEDIS'] == district){
-                        layer.fire('click');
-                    }
-                })
-            }
         }
     );
 
@@ -56,7 +55,7 @@
             marker = L.marker([lat, lng]).addTo(map);
             map.setView([lat, lng], 17);
             var district = leafletPip.pointInLayer([lng, lat], boundaries);
-            
+
             $.address.parameter('address', encodeURI($('#search_address').val()));
             district[0].fire('click');
         });
@@ -101,7 +100,6 @@
         layer.bindLabel(labelText);
     }
     function featureInfo(properties){
-
         var district = parseInt(properties['ILHOUSEDIS']);
         var blob = "<div>\
             <p><a href='index.html'>&laquo; back to State view</a></p>\
@@ -135,8 +133,8 @@
                   </tr>\
                   <tr>\
                       <td>Annual boost to local economy</td>\
-                      <td>" + accounting.formatMoney(properties['KIDAVGEITC'], {precision: 0}) + "M</td>\
-                      <td>" + accounting.formatMoney(properties['KIDAVGE_01'], {precision: 0}) + "M</td>\
+                      <td>" + accounting.formatMoney(properties['MULTEFFECT'], {precision: 2}) + "M</td>\
+                      <td>" + accounting.formatMoney(properties['MULTEFF_01'], {precision: 2}) + "M</td>\
                   </tr>\
               </tbody>\
             </table>\
