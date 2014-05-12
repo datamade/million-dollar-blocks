@@ -30,8 +30,7 @@ house_boundaries.shp:
 	mv raw/PA\ 97-6\ House\ Districts.xml raw/house_boundaries.xml
 
 eitc.csv:
-	iconv -f ISO-8859-1 -t UTF-8 \
-		raw/"IL EITC Data by State House Legislative District v4.csv" > build/$@
+	cp raw/"IL EITC Data by State House Legislative District v4.csv" build/$@
 
 eitc.table: eitc.csv
 	psql -d $(PG_DB) -U $(PG_USER) -h $(PG_HOST) -p $(PG_PORT) -c "DROP TABLE IF EXISTS info_by_dist"
@@ -45,7 +44,7 @@ house_boundaries.table: house_boundaries.shp
 	@touch build/$@
 
 merged_eitc.shp: house_boundaries.table eitc.table
-	@pgsql2shp -f finished_files/$@ -h $(PG_HOST) -u $(PG_USER) -p $(PG_PORT) $(PG_DB) \
+	@export PGCLIENTENCODING=ISO-8859-1; pgsql2shp -f finished_files/$@ -h $(PG_HOST) -u $(PG_USER) -p $(PG_PORT) $(PG_DB) \
 		"SELECT house_boundaries.geom, info_by_dist.* FROM house_boundaries \
 		JOIN info_by_dist ON house_boundaries.district_1 = cast(info_by_dist.ilhousedist as smallint)"
 
