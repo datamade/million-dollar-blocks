@@ -30,8 +30,8 @@ house_boundaries.shp:
 	mv raw/PA\ 97-6\ House\ Districts.xml raw/house_boundaries.xml
 
 eitc.csv:
-	in2csv --sheet "State EITC Data by IL Leg House" \
-		raw/"IL EITC Data by State House Legislative District v2.xlsx" > build/$@
+	iconv -f ISO-8859-1 -t UTF-8 \
+		raw/"IL EITC Data by State House Legislative District v4.csv" > build/$@
 
 eitc.table: eitc.csv
 	psql -d $(PG_DB) -U $(PG_USER) -h $(PG_HOST) -p $(PG_PORT) -c "DROP TABLE IF EXISTS info_by_dist"
