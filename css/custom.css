@@ -7,6 +7,10 @@ a, a:hover {
 color: #90BE44;
 }
 
+hr {
+  border-color: #999;
+}
+
 .notes p, .notes li {
   color: #999;
   font-size: .8em;

@@ -138,11 +138,11 @@
                   </tr>\
               </tbody>\
             </table>\
-            <div class='col-md-6'>\
+            <div class='col-lg-6'>\
               <p><a target='_blank' class='btn btn-primary' href='docs/EITC Legislative Fact Sheets FINAL " + district + ".pdf'><i class='icon-download'></i> Download district profile</a></p>\
               <p><a target='_blank' href='docs/EITC Legislative Fact Sheets FINAL " + district + ".pdf'><img class='img-responsive img-rounded' src='images/eitc_factsheet.png' alt='EITC Factsheet' /></a></p>\
             </div>\
-            <div class='col-md-6'>\
+            <div class='col-lg-6'>\
               <a class='btn btn-primary' target='_blank' href='http://salsa4.salsalabs.com/o/50920/p/dia/action3/common/public/?action_KEY=10927'><i class='icon-bullhorn'></i> Tell your lawmaker EITC Works!</a>\
             </div>\
             <div class='clearfix'></div>\
