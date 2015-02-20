@@ -1,14 +1,10 @@
-# EITC Works
-
-The Earned Income Tax Credit (EITC) helps people who work but struggle to get by on low wages, while also reducing poverty, increasing tax fairness, and boosting local economies across the state. Doubling the Illinois Earned Income Tax Credit (EITC) from 10 to 20% of the federal EITC is one of the best investments Illinois can make.
-
-This map allows Illinois residents to explore their legislative district and see how EITC effects them.
+# Chicago Million Dollar Blocks
 
 ## Running locally
 
 ``` bash
-git clone git@github.com:datamade/eitc-map.git
-cd large-lots
+git clone git@github.com:datamade/million-dollar-blocks.git
+cd million-dollar-blocks
 
 # to run locally
 python -m SimpleHTTPServer
@@ -17,13 +13,6 @@ python -m SimpleHTTPServer
 navigate to http://localhost:8000/
 
 # Data
-
-Our map was built using open data from Chicago and Cook County:
-
-* [2011 Illinois House Districts](http://ilhousedems.com/redistricting/2011-maps/Legislative_Districts_Public_Act/House%20and%20Senate%20shape%20files.zip)
-* [Brookings Tax Year 2012 EITC Interactive](http://www.brookings.edu/research/interactives/eitc)
-* [Characteristics of EITC-Eligible Tax Units in 2012 by State](http://www.brookings.edu/research/interactives/~/media/B3EAE3F03D9946A1A506D00405440513.ashx) - Metropolitan Policy Program at Brookings
-* EITC Table from IRS Compliance Data Warehouse, Tax Year 2012
 
 # dependencies
 We used the following open source tools:
@@ -37,6 +26,8 @@ We used the following open source tools:
 
 * Derek Eder - developer, content
 * Eric van Zanten - developer, GIS data merging
+* Forest Gregg - developer, data cruncher
+* Cathy Deng - developer, data cruncher 
 
 ## Errors / Bugs
 
@@ -52,4 +43,4 @@ Report it here: https://github.com/datamade/eitc-map/issues
 
 ## Copyright
 
-Copyright (c) 2014 DataMade and Voices for Illinois Children. Released under the [MIT License](https://github.com/datamade/eitc-map/blob/master/LICENSE).
+Copyright (c) 2015 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/master/LICENSE).

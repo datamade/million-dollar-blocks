@@ -1,64 +1,71 @@
 (function(){
     var lastClicked;
-    var boundaries;
-    var marker;
-    var map = L.map('map', {minZoom: 6})
-        .fitBounds([[36.970298, -87.495199],[42.5083380000001,-91.5130789999999]]);
-    var googleLayer = new L.Google('ROADMAP', {animate: false});
-    map.addLayer(googleLayer);
-    map.on('zoomstart', function(e){
-        map.removeLayer(boundaries);
-        if (typeof marker !== 'undefined'){
-            map.removeLayer(marker);
-        }
+    var blocksLayer;
+    var map = L.map('map', {
+        center: [41.83887416186901, -87.87139892578125],
+        zoom: 9,
+        scrollWheelZoom: false
     })
-    google.maps.event.addListener(googleLayer._google, 'idle', function(e){
-        map.addLayer(boundaries);
-        if (typeof marker !== 'undefined'){
-            map.addLayer(marker);
-        }
-    })
-    google.maps.event.addListenerOnce(googleLayer._google, 'idle', function(e){
-        var district = $.address.parameter('district');
-        if (district && !address){
-            boundaries.eachLayer(function(layer){
-                if(layer.feature.properties['ILHOUSEDIS'] == district){
-                    layer.fire('click');
-                }
-            })
-        }
-    })
+    // var googleLayer = new L.Google('ROADMAP', {animate: false});
+    // map.addLayer(googleLayer);
+    L.tileLayer('https://{s}.tiles.mapbox.com/v3/datamade.hn83a654/{z}/{x}/{y}.png', {
+        attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+    }).addTo(map);
     var info = L.control({position: 'bottomleft'});
     info.onAdd = function(map){
         this._div = L.DomUtil.create('div', 'info');
         return this._div;
     }
 
-    $.when($.getJSON('data/finished_files/merged_eitc.geojson')).then(
-        function(shapes){
+    var fields = 'geoid10,total_cost,cartodb_id'
 
-            boundaries = L.geoJson(shapes, {
-                style: style,
-                onEachFeature: onEachFeature
-            }).addTo(map);
-
-        }
-    );
-
-    $('#search_address').geocomplete()
-        .bind('geocode:result', function(event, result){
-            if (typeof marker !== 'undefined'){
-                map.removeLayer(marker);
+    var layerOpts = {
+        user_name: 'datamade',
+        type: 'cartodb',
+        cartodb_logo: false,
+        sublayers: [
+            {
+                sql: "select * from mil_dol_blocks_total",
+                cartocss: '#mil_dol_blocks_total{polygon-fill:#000;line-color:#000;line-width:1;}',
+                interactivity: fields
             }
-            var lat = result.geometry.location.lat();
-            var lng = result.geometry.location.lng();
-            marker = L.marker([lat, lng]).addTo(map);
-            map.setView([lat, lng], 17);
-            var district = leafletPip.pointInLayer([lng, lat], boundaries);
+        ]
+    }
 
-            $.address.parameter('address', encodeURI($('#search_address').val()));
-            district[0].fire('click');
-        });
+    cartodb.createLayer(map, layerOpts)
+      .addTo(map)
+      .done(function(layer){
+          console.log(layer)
+          blocksLayer = layer.getSubLayer(0);
+          blocksLayer.setInteraction(true);
+          blocksLayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
+            $('#map div').css('cursor','pointer');
+            // LargeLots.info.update(data);
+          });
+          blocksLayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex) {
+            $('#map div').css('cursor','inherit');
+            //LargeLots.info.clear();
+          });
+          blocksLayer.on('featureClick', function(e, pos, latlng, data){
+            //LargeLots.getOneParcel(data['display_pin']);
+            console.log(data);
+          });
+      }).error(function(e){console.log(e)});
+
+    //$('#search_address').geocomplete()
+    //    .bind('geocode:result', function(event, result){
+    //        if (typeof marker !== 'undefined'){
+    //            map.removeLayer(marker);
+    //        }
+    //        var lat = result.geometry.location.lat();
+    //        var lng = result.geometry.location.lng();
+    //        marker = L.marker([lat, lng]).addTo(map);
+    //        map.setView([lat, lng], 17);
+    //        var district = leafletPip.pointInLayer([lng, lat], boundaries);
+
+    //        $.address.parameter('address', encodeURI($('#search_address').val()));
+    //        district[0].fire('click');
+    //    });
 
     var address = convertToPlainString($.address.parameter('address'));
     if(address){

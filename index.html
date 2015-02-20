@@ -7,25 +7,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>EITC Works!</title>
-        
+
         <meta name="description" content="Pinpoint how doubling the state Earned Income Tax Credit (EITC) would help lift families out of poverty and boost local economies across Illinois." />
 
-        <!-- Twitter Card data --> 
-        <meta name="twitter:card" content="summary"> 
-        <meta name="twitter:site" content="@Voices4ILKids"> 
-        <meta name="twitter:title" content="EITC Works!"> 
-        <meta name="twitter:description" content="Pinpoint how doubling the state Earned Income Tax Credit (EITC) would help lift families out of poverty and boost local economies across Illinois."> 
-        <meta name="twitter:creator" content="@Voices4ILKids"> 
-        <!-- Twitter Summary card images must be at least 200x200px --> 
-        <meta name="twitter:image" content="http://eitcworks.org/images/EITC_social.png">
+        <!-- Twitter Card data -->
+        <!-- Twitter Summary card images must be at least 200x200px -->
 
-        <!-- Open Graph data --> 
-        <meta property="og:title" content="EITC Works!" /> 
-        <meta property="og:type" content="website" /> 
-        <meta property="og:url" content=" http://eitcworks.org" />
-        <meta property="og:image" content="http://eitcworks.org/images/EITC_social.png" />
-        <meta property="og:description" content="Pinpoint how doubling the state Earned Income Tax Credit (EITC) would help lift families out of poverty and boost local economies across Illinois." /> 
-        <meta property="og:site_name" content="EITC Works!" />
+        <!-- Open Graph data -->
 
         <meta name="viewport" content="width=device-width, initial-scale=0.5, width=640, minimum-scale=0.5">
         <link rel="stylesheet" href="css/normalize.css">
@@ -33,10 +21,20 @@
         <link href="css/font-awesome.css" rel="stylesheet">
 
         <link media="all" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%27+rel%3D%27stylesheet%27+type%3D%27text%2Fcss%27&amp;ver=3.8.1" id="velocity_googlefont_style-css" rel="stylesheet">
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/leaflet.label.css">
         <link rel="stylesheet" href="css/custom.css">
         <script src="js/modernizr-2.6.2.min.js"></script>
+        <style id="million-dollar-styles">
+            #mil_dol_blocks_per_year {
+              polygon-fill: #41ab5d;
+              polygon-opacity: 0.7;
+              line-color: #006d2c;
+              line-width: 0.5;
+              line-opacity: 1;
+            }
+        </style>
     </head>
     <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -50,19 +48,12 @@
           </button>
           <a class='navbar-brand' href="/">
             <span class="stateface stateface-il"></span>
-            EITC Works!
+            Chicago Million Dollar Blocks
           </a>
         </div>
         <div class="collapse navbar-collapse">
-          <span class='navbar-text'><em>Lifting Working Families, Boosting Local Economies</em></span>
           <ul class="nav navbar-nav pull-right">
-            <li><a href="what-is-eitc.html">What is EITC?</a></li>
-            <li><a href="index.html">Statewide stats</a></li>
-            <li>
-                <a  id='take-action' target='_blank' href="http://salsa4.salsalabs.com/o/50920/p/dia/action3/common/public/?action_KEY=10927">
-                    <i class='icon-bullhorn'></i>
-                    Take action!</a>
-            </li>
+            <li><a href="about.html">What is this?</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -73,13 +64,11 @@
         <div class='row'>
 
           <div class='col-md-12' id='address-search'>
-          <br /><br /><br />
-          <p>The <a href='what-is-eitc.html'>Earned Income Tax Credit</a> (EITC) helps people who work but struggle to get by on low wages, while also reducing poverty, increasing tax fairness, and boosting local economies across the state. Doubling the Illinois Earned Income Tax Credit (EITC) from 10 to 20% of the federal EITC is one of the best investments Illinois can make. <a target='_blank' href='http://www.cbpp.org/cms/index.cfm?fa=view&id=2506'>Read more about EITC &raquo;</a><br /></p>
 
             <p>
               <br />
               <form class='form-inline hidden-print'>
-                <input class='form-control input-lg col-md-8' id='search_address' placeholder='Enter your address to see how the EITC Works for you!' type='text' />
+                <input class='form-control input-lg col-md-8' id='search_address' placeholder='Enter your address' type='text' />
                 <input class='btn btn-primary btn-lg' id='search' type='button' value='Search' />
               </form>
               <br />
@@ -89,56 +78,7 @@
         <div class='row'>
           <div class='col-md-6'>
             <div class='well' id='district-info'>
-              <h3>State of Illinois, Tax Year 2012</h3>
 
-              <table class='table'>
-                <tbody>
-                    <tr>
-                        <td>Median income of recipients</td>
-                        <td>$13,436</td>
-                    </tr>
-                    <tr>
-                        <td>Households receiving EITC</td>
-                        <td>902,196</td>
-                    </tr>
-                    <tr>
-                        <td>Children in EITC households</td>
-                        <td>1,181,877</td>
-                    </tr>
-                </tbody>
-              </table>
-              
-              <h3>Statewide Impact</h3>
-              <table class='table'>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Now (10%)</th>
-                        <th>With expansion (20%)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Average boost to working families' income</td>
-                        <td>$300</td>
-                        <td>$600</td>
-                    </tr>
-                    <tr>
-                        <td>Annual economic activity from EITC</td>
-                        <td>$322.3M</td>
-                        <td>$644.5M</td>
-                    </tr>
-                </tbody>
-              </table>
-              <div class='col-lg-6'>
-                <p><a target='_blank' class='btn btn-primary' href='docs/EITC Statewide Factsheet.pdf'><i class='icon-download'></i> Download statewide profile</a></p>
-                <p><a target='_blank' href='docs/EITC Statewide Factsheet.pdf'><img class='img-responsive img-rounded' src='images/eitc_factsheet.png' alt='EITC Factsheet' /></a></p>
-              </div>
-              <div class='col-lg-6'>
-                <a class='btn btn-primary' target='_blank' href='http://salsa4.salsalabs.com/o/50920/p/dia/action3/common/public/?action_KEY=10927'><i class='icon-bullhorn'></i> Tell your lawmaker EITC Works!</a>
-              </div>
-              <div class='clearfix'></div>
-              
             </div>
           </div>
           <div class='col-md-6'>
@@ -148,39 +88,22 @@
         <div class='row'>
           <div class='col-md-8'>
             <h4 id='notes'>Notes</h4>
-            <div class='notes'>
-
-                <p>All participation estimates are based on federal EITC data from Tax Year 2012, assuming a 90% participation rate for the state EITC. Economic activity estimates are based on an assumed multiplier effect of $1.50. </p>
-
-                <p>Sources of federal data:</p>
-
-                <ul>
-                    <li><a href='http://www.brookings.edu/research/interactives/eitc'>Brookings Tax Year 2012 EITC Interactive</a></li>
-                    <li><a href='http://www.brookings.edu/research/interactives/~/media/B3EAE3F03D9946A1A506D00405440513.ashx'>Characteristics of EITC-Eligible Tax Units in 2012 by State</a> Metropolitan Policy Program at Brookings</li>
-                    <li>EITC Table from IRS Compliance Data Warehouse, Tax Year 2012</li>
-                </ul>
-
-                <p><a href='https://github.com/datamade/eitc-map/'>View the source code</a> and <a href='https://github.com/datamade/eitc-map/blob/master/data/finished_files/merged_eitc.geojson'>download the data for the above map</a> on GitHub. For additional questions on methodology, contact Lisa Christensen Gee at <a href='mailto:lchristensengee@voices4kids.org'>lchristensengee@voices4kids.org</a>.</p>
-            </div>
           </div>
         </div>
 
         <div class="footer">
           <hr />
-          <p class='pull-right'><a href='http://www.voices4kids.org/our-priorities/fiscal-policy-center/'><img class='img-responsive' src='images/fiscal_policy_center_voices_for_il_children.png' alt='Fiscal Policy Center at Voices for Illinois Children' /></a></p>
           <p class='pull-left'>Website by <a href='http://datamade.us'>DataMade</a></p>
         </div>
       </div>
     </div> <!-- /container -->
-        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-        <script src="js/jquery.geocomplete.min.js"></script>
+        <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
         <script src="js/jquery.address.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/accounting.min.js"></script>
         <script src="js/leaflet.js"></script>
-        <script src="js/leaflet-google.js"></script>
         <script src="js/leaflet-pip.min.js"></script>
         <script src="js/leaflet.label.js"></script>
         <script src="js/map.js"></script>
