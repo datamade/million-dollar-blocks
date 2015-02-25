@@ -1,5 +1,4 @@
 body {
-  padding-top: 50px;
   font-size: 18px;
 }
 
@@ -70,6 +69,10 @@ hr {
     border-radius: 5px;
 }
 
+.info h4 {
+  font-size: 18px;
+  color: #777;
+}
 
 table {
   background: #fff;

@@ -10,12 +10,14 @@
     #cartodb-map { width: 100%; height:100%; background: black;}
   </style>
 
+  <script src="/js/accounting.min.js"></script>
   <script>
     var map;
     function init(){
       // initiate leaflet map
+      $('#cartodb-map').height($('body').height() - 100)
       map = new L.Map('cartodb-map', {
-        center: [41.83887416186901, -87.87139892578125],
+        center: [41.835548889287054, -87.66986846923828],
         zoom: 11
       })
 
@@ -32,6 +34,23 @@
         attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
       }).addTo(map);
 
+      var info = L.control({position: 'bottomright'});
+      info.onAdd = function(map){
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+      }
+      info.update = function(props){
+        if (typeof props !== 'undefined'){
+          var info = '<h4>Cost: ' + accounting.formatMoney(props.total_cost, '$', 0) + '</h4>';
+          info += '<p>Cases: ' + props.cases + '</p>';
+          this._div.innerHTML = info;
+        }
+      }
+      info.clear = function(){
+        this._div.innerHTML = '';
+      }
+      info.addTo(map);
       var layerUrl = 'http://datamade.cartodb.com/api/v2/viz/0f2b75e0-bc90-11e4-9bbb-0e4fddd5de28/viz.json';
 
       // change the query for the first layer
@@ -49,9 +68,18 @@
 
       cartodb.createLayer(map, layerUrl)
         .addTo(map)
-        .on('done', function(layer) {
+        .done(function(layer) {
           var sublayer = layer.getSubLayer(0);
           sublayer.set(subLayerOptions);
+          sublayer.setInteraction(true);
+          sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex){
+              $('#map div').css('cursor','pointer');
+              info.update(data);
+          })
+          sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex){
+              $('#map div').css('cursor','inherit');
+              info.clear();
+          })
           sublayer.on('featureClick', function(e, pos, latlng, data){
               console.log(e)
               console.log(data);
@@ -61,9 +89,50 @@
         });
     }
   </script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/custom.css" />
 </head>
 
-<body onload="init()">
-  <div id='cartodb-map'></div>
+<body onload="init()" style="height: 100%">
+  <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Million Dollar Blocks</a>
+    </div>
+    <div class="navbar-collapse collapse pull-right">
+      <ul class="nav navbar-nav">
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-9">
+        <div id="cartodb-map"></div>
+      </div>
+      <div class="col-md-3">
+        <h3>Headline</h3>
+        <p>
+      This is where we describe what this thing as put calls to action
+      For example, we could discuss how geographically concentrated incarceration
+      spending is. How there are other ideas for how to spend the money.
+
+      One idea is that we could foccus in out the top few blocks (the brightest red), and
+      do some research to tell the story about those blocks.
+    </p>
+      </div>
+    </div>
+    <br />
+    <div class='clearfix'></div>
+
+    <div class="footer">
+      <p class='pull-right'>
+      </p>
+    </div>
+  </div>
 </body>
 </html>
