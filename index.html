@@ -18,7 +18,8 @@
       $('#cartodb-map').height($('body').height())
       map = new L.Map('cartodb-map', {
         center: [41.835548889287054, -87.66986846923828],
-        zoom: 11
+        zoom: 11,
+        scrollWheelZoom: false
       })
 
       map_css = "\
@@ -132,13 +133,6 @@
           go down the route of exploring particular blocks/neighborhoods (i.e. zoom to relevant area
           on left when on a given 'slide' on right).
       </div>
-    </div>
-    <br />
-    <div class='clearfix'></div>
-
-    <div class="footer">
-      <p class='pull-right'>
-      </p>
     </div>
   </div>
 </body>
