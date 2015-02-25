@@ -73,11 +73,11 @@
           sublayer.set(subLayerOptions);
           sublayer.setInteraction(true);
           sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex){
-              $('#map div').css('cursor','pointer');
+              $('#cartodb-map div').css('cursor','pointer');
               info.update(data);
           })
           sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex){
-              $('#map div').css('cursor','inherit');
+              $('#cartodb-map div').css('cursor','inherit');
               info.clear();
           })
           sublayer.on('featureClick', function(e, pos, latlng, data){
