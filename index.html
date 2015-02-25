@@ -1,114 +1,60 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>EITC Works!</title>
+<html>
+<head>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+  <![endif]-->
+  <style>
+    html, body {width:100%; height:100%; padding: 0; margin: 0;}
+    #cartodb-map { width: 100%; height:100%; background: black;}
+  </style>
 
-        <meta name="description" content="Pinpoint how doubling the state Earned Income Tax Credit (EITC) would help lift families out of poverty and boost local economies across Illinois." />
+  <script>
+    var map;
+    function init(){
+      // initiate leaflet map
+      map = new L.Map('cartodb-map', {
+        center: [41.83887416186901, -87.87139892578125],
+        zoom: 9
+      })
 
-        <!-- Twitter Card data -->
-        <!-- Twitter Summary card images must be at least 200x200px -->
+      L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+        attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+      }).addTo(map);
 
-        <!-- Open Graph data -->
+      var layerUrl = 'http://datamade.cartodb.com/api/v2/viz/0f2b75e0-bc90-11e4-9bbb-0e4fddd5de28/viz.json';
 
-        <meta name="viewport" content="width=device-width, initial-scale=0.5, width=640, minimum-scale=0.5">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.css" rel="stylesheet">
+      // change the query for the first layer
+      var subLayerOptions = {
+        sql: "SELECT * FROM mil_dol_blocks_total",
+        cartocss: "#mil_dol_blocks_total{polygon-fill: #109DCD;}",
+        interactivity: 'geoid10,total_cost'
+      }
 
-        <link media="all" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%27+rel%3D%27stylesheet%27+type%3D%27text%2Fcss%27&amp;ver=3.8.1" id="velocity_googlefont_style-css" rel="stylesheet">
-        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
-        <link rel="stylesheet" href="css/leaflet.css">
-        <link rel="stylesheet" href="css/leaflet.label.css">
-        <link rel="stylesheet" href="css/custom.css">
-        <script src="js/modernizr-2.6.2.min.js"></script>
-        <style id="million-dollar-styles">
-            #mil_dol_blocks_per_year {
-              polygon-fill: #41ab5d;
-              polygon-opacity: 0.7;
-              line-color: #006d2c;
-              line-width: 0.5;
-              line-opacity: 1;
-            }
-        </style>
-    </head>
-    <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class='navbar-brand' href="/">
-            <span class="stateface stateface-il"></span>
-            Chicago Million Dollar Blocks
-          </a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav pull-right">
-            <li><a href="about.html">What is this?</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+      var layerOpts = {
+        user_name: 'datamade',
+        type: 'cartodb',
+        cartodb_logo: false,
+      }
 
-    <div class="container">
-      <div class='col-md-12'>
-        <div class='row'>
+      cartodb.createLayer(map, layerUrl)
+        .addTo(map)
+        .on('done', function(layer) {
+          var sublayer = layer.getSubLayer(0);
+          sublayer.set(subLayerOptions);
+          sublayer.on('featureClick', function(e, pos, latlng, data){
+              console.log(e)
+              console.log(data);
+          })
+        }).on('error', function() {
+          //log the error
+        });
+    }
+  </script>
+</head>
 
-          <div class='col-md-12' id='address-search'>
-
-            <p>
-              <br />
-              <form class='form-inline hidden-print'>
-                <input class='form-control input-lg col-md-8' id='search_address' placeholder='Enter your address' type='text' />
-                <input class='btn btn-primary btn-lg' id='search' type='button' value='Search' />
-              </form>
-              <br />
-            </p>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-6'>
-            <div class='well' id='district-info'>
-
-            </div>
-          </div>
-          <div class='col-md-6'>
-            <div id='map'></div>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='col-md-8'>
-            <h4 id='notes'>Notes</h4>
-          </div>
-        </div>
-
-        <div class="footer">
-          <hr />
-          <p class='pull-left'>Website by <a href='http://datamade.us'>DataMade</a></p>
-        </div>
-      </div>
-    </div> <!-- /container -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
-        <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
-        <script src="js/jquery.address.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/accounting.min.js"></script>
-        <script src="js/leaflet.js"></script>
-        <script src="js/leaflet-pip.min.js"></script>
-        <script src="js/leaflet.label.js"></script>
-        <script src="js/map.js"></script>
-
-        <script src="js/analytics_lib.js"></script>
-
-    </body>
+<body onload="init()">
+  <div id='cartodb-map'></div>
+</body>
 </html>
