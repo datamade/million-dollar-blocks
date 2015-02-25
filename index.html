@@ -16,8 +16,17 @@
       // initiate leaflet map
       map = new L.Map('cartodb-map', {
         center: [41.83887416186901, -87.87139892578125],
-        zoom: 9
+        zoom: 11
       })
+
+      map_css = "\
+      #mil_dol_blocks_total{\
+        [total_cost >= 0] {polygon-fill: rgba(31, 32, 128, 0.5);}\
+        [total_cost >= 370000] {polygon-fill: rgba(73, 30, 128, 0.5);}\
+        [total_cost >= 1000000] {polygon-fill: rgba(255, 0, 0, 0.5);}\
+        [total_cost >= 2000000] {polygon-fill: rgba(255, 0, 0, 0.5);}\
+        [total_cost >= 6000000] {polygon-fill: rgba(255, 0, 0, 1);line-width: 6;line-color: rgba(255, 0, 0, 0.8);}\
+      }"
 
       L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
         attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
@@ -28,7 +37,7 @@
       // change the query for the first layer
       var subLayerOptions = {
         sql: "SELECT * FROM mil_dol_blocks_total",
-        cartocss: "#mil_dol_blocks_total{polygon-fill: #109DCD;}",
+        cartocss: map_css,
         interactivity: 'geoid10,total_cost'
       }
 
