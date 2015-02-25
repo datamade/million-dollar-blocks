@@ -15,7 +15,7 @@
     var map;
     function init(){
       // initiate leaflet map
-      $('#cartodb-map').height($('body').height() - 100)
+      $('#cartodb-map').height($('body').height())
       map = new L.Map('cartodb-map', {
         center: [41.835548889287054, -87.66986846923828],
         zoom: 11
@@ -94,7 +94,7 @@
 </head>
 
 <body onload="init()" style="height: 100%">
-  <div class="navbar navbar-default navbar-static-top" role="navigation">
+<!--   <div class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -107,23 +107,30 @@
     <div class="navbar-collapse collapse pull-right">
       <ul class="nav navbar-nav">
       </ul>
-    </div><!--/.nav-collapse -->
-  </div>
+    </div>
+  </div> -->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-6">
         <div id="cartodb-map"></div>
       </div>
-      <div class="col-md-3">
-        <h3>Headline</h3>
+      <div class="col-md-6">
+        <h1>Million Dollar Blocks</h1>
+        <h3>Header</h3>
         <p>
-      This is where we describe what this thing as put calls to action
-      For example, we could discuss how geographically concentrated incarceration
-      spending is. How there are other ideas for how to spend the money.
-
-      One idea is that we could foccus in out the top few blocks (the brightest red), and
-      do some research to tell the story about those blocks.
-    </p>
+          This is where we describe what this thing is & put calls to action.
+          For example, we could discuss how geographically concentrated incarceration
+          spending is. How there are other ideas for how to spend the money.
+        </p>
+        <p>
+          One idea is that we could focus in out the top few blocks (the brightest red), and
+          do some research to tell the story about those blocks.
+        </p>
+        <p>
+          Perhaps this section of the page can be a <a href="http://getbootstrap.com/javascript/#carousel" target="blank">slideshow</a> with arrows to take you through
+          a narrative, while map remains on left. Maybe even some interactive zooming, if we
+          go down the route of exploring particular blocks/neighborhoods (i.e. zoom to relevant area
+          on left when on a given 'slide' on right).
       </div>
     </div>
     <br />

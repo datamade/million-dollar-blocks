@@ -18,7 +18,7 @@ hr {
 .navbar-brand { font-size: 30px;}
 .navbar-header>.navbar-brand, .navbar-inverse .navbar-nav>li>a {color: #90BE44;}
 
-#map { width: 100%; height: 670px;}
+#map { width: 100%;}
 
 .leaflet-google-layer{
     z-index: 0;
