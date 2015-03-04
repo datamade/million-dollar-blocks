@@ -20,8 +20,7 @@
       $('#cartodb-map').height($('body').height())
       map = new L.Map('cartodb-map', {
         center: [41.8586, -87.6946],
-        zoom: 11,
-        scrollWheelZoom: false
+        zoom: 11
       });
 
       var hash = new L.Hash(map);
@@ -29,7 +28,7 @@
       map_css = "\
       #mil_dol_blocks_total{\
         polygon-opacity: 0.6;\
-        [total_cost >= 0] {polygon-fill: #fee5d9;}\
+        [total_cost < 370000] {polygon-opacity: 0;}\
         [total_cost >= 370000] {polygon-fill: #fcae91;}\
         [total_cost >= 1000000] {polygon-fill: #fb6a4a;}\
         [total_cost >= 2000000] {polygon-fill: #de2d26;}\
