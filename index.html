@@ -3,7 +3,7 @@
   <title>Chicago - Million Dollar Blocks</title>
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
   <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
-  <script src="/js/leaflet-hash.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
   <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
   <![endif]-->
@@ -36,7 +36,8 @@
         [total_cost >= 6000000] {polygon-fill: #a50f15; line-width: 6;line-color: #a50f15; line-opacity: 0.6; }\
       }"
 
-      L.tileLayer('http://b.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+      //L.tileLayer('http://b.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+        L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
         attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
       }).addTo(map);
 
