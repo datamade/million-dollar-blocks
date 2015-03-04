@@ -1,7 +1,9 @@
 <html>
 <head>
+  <title>Chicago - Million Dollar Blocks</title>
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
   <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <script src="/js/leaflet-hash.js"></script>
   <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
   <![endif]-->
@@ -17,21 +19,24 @@
       // initiate leaflet map
       $('#cartodb-map').height($('body').height())
       map = new L.Map('cartodb-map', {
-        center: [41.835548889287054, -87.66986846923828],
-        zoom: 11,
+        center: [41.8860, -87.6769],
+        zoom: 12,
         scrollWheelZoom: false
-      })
+      });
+
+      var hash = new L.Hash(map);
 
       map_css = "\
       #mil_dol_blocks_total{\
-        [total_cost >= 0] {polygon-fill: rgba(31, 32, 128, 0.5);}\
-        [total_cost >= 370000] {polygon-fill: rgba(73, 30, 128, 0.5);}\
-        [total_cost >= 1000000] {polygon-fill: rgba(255, 0, 0, 0.5);}\
-        [total_cost >= 2000000] {polygon-fill: rgba(255, 0, 0, 0.5);}\
-        [total_cost >= 6000000] {polygon-fill: rgba(255, 0, 0, 1);line-width: 6;line-color: rgba(255, 0, 0, 0.8);}\
+        polygon-opacity: 0.6;\
+        [total_cost >= 0] {polygon-fill: #fee5d9;}\
+        [total_cost >= 370000] {polygon-fill: #fcae91;}\
+        [total_cost >= 1000000] {polygon-fill: #fb6a4a;}\
+        [total_cost >= 2000000] {polygon-fill: #de2d26;}\
+        [total_cost >= 6000000] {polygon-fill: #a50f15; line-width: 6;line-color: #a50f15; line-opacity: 0.6; }\
       }"
 
-      L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+      L.tileLayer('http://b.tile.stamen.com/toner/{z}/{x}/{y}.png', {
         attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
       }).addTo(map);
 
@@ -112,11 +117,11 @@
   </div> -->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div id="cartodb-map"></div>
       </div>
-      <div class="col-md-6">
-        <h1>Million Dollar Blocks</h1>
+      <div class="col-md-4">
+        <h1><small>Chicago</small><br />Million Dollar Blocks</h1>
         <h3>Header</h3>
         <p>
           This is where we describe what this thing is & put calls to action.
