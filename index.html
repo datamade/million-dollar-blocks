@@ -1,9 +1,10 @@
 <html>
 <head>
-  <title>Chicago - Million Dollar Blocks</title>
+  <title>Chicago's Million Dollar Blocks</title>
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
-  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+  <link rel="stylesheet" href="css/bootstrap.darkly.min.css" />
+  <link rel="stylesheet" href="css/custom.css" />
+
   <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
   <![endif]-->
@@ -11,16 +12,64 @@
     html, body {width:100%; height:100%; padding: 0; margin: 0;}
     #cartodb-map { width: 100%; height:100%; background: black;}
   </style>
+</head>
 
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Chicago's Million Dollar Blocks</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div id="cartodb-map"></div>
+      </div>
+      <div class="col-md-4">
+        <h1><small>Chicago's</small><br />Million Dollar Blocks</h1>
+        <p>
+          This is where we describe what this thing is & put calls to action.
+          For example, we could discuss how geographically concentrated incarceration
+          spending is. How there are other ideas for how to spend the money.
+        </p>
+        <p>
+          One idea is that we could focus in out the top few blocks (the brightest red), and
+          do some research to tell the story about those blocks.
+        </p>
+        <p>
+          Perhaps this section of the page can be a <a href="http://getbootstrap.com/javascript/#carousel" target="blank">slideshow</a> with arrows to take you through
+          a narrative, while map remains on left. Maybe even some interactive zooming, if we
+          go down the route of exploring particular blocks/neighborhoods (i.e. zoom to relevant area
+          on left when on a given 'slide' on right).
+      </div>
+    </div>
+  </div>
+
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
   <script src="js/accounting.min.js"></script>
   <script>
     var map;
     function init(){
       // initiate leaflet map
-      $('#cartodb-map').height($('body').height())
       map = new L.Map('cartodb-map', {
-        center: [41.8586, -87.6946],
-        zoom: 11
+        center: [41.8417, -87.6791],
+        zoom: 12
       });
 
       var hash = new L.Hash(map);
@@ -49,7 +98,6 @@
       info.update = function(props){
         if (typeof props !== 'undefined'){
           var info = '<h4>Cost: ' + accounting.formatMoney(props.total_cost, '$', 0) + '</h4>';
-          info += '<p>Cases: ' + props.cases + '</p>';
           this._div.innerHTML = info;
         }
       }
@@ -57,7 +105,7 @@
         this._div.innerHTML = '';
       }
       info.addTo(map);
-      var layerUrl = 'http://datamade.cartodb.com/api/v2/viz/2b312178-bd16-11e4-ac7f-0e853d047bba/viz.json';
+      var layerUrl = 'http://datamade.cartodb.com/api/v2/viz/a7ae2e2e-cd12-11e4-81e2-0e018d66dc29/viz.json';
 
       // change the query for the first layer
       var subLayerOptions = {
@@ -94,51 +142,17 @@
           //log the error
         });
     }
-  </script>
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/custom.css" />
-</head>
 
-<body onload="init()" style="height: 100%">
-<!--   <div class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Million Dollar Blocks</a>
-    </div>
-    <div class="navbar-collapse collapse pull-right">
-      <ul class="nav navbar-nav">
-      </ul>
-    </div>
-  </div> -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8">
-        <div id="cartodb-map"></div>
-      </div>
-      <div class="col-md-4">
-        <h1><small>Chicago</small><br />Million Dollar Blocks</h1>
-        <h3>Header</h3>
-        <p>
-          This is where we describe what this thing is & put calls to action.
-          For example, we could discuss how geographically concentrated incarceration
-          spending is. How there are other ideas for how to spend the money.
-        </p>
-        <p>
-          One idea is that we could focus in out the top few blocks (the brightest red), and
-          do some research to tell the story about those blocks.
-        </p>
-        <p>
-          Perhaps this section of the page can be a <a href="http://getbootstrap.com/javascript/#carousel" target="blank">slideshow</a> with arrows to take you through
-          a narrative, while map remains on left. Maybe even some interactive zooming, if we
-          go down the route of exploring particular blocks/neighborhoods (i.e. zoom to relevant area
-          on left when on a given 'slide' on right).
-      </div>
-    </div>
-  </div>
+    $(window).resize(function () {
+      var h = $(window).height(),
+      offsetTop = 85; // Calculate the top offset
+      $('#cartodb-map').css('height', (h - offsetTop));
+    }).resize();
+
+    $(function() {
+      init();
+    });
+  </script>
+
 </body>
 </html>
