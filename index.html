@@ -73,7 +73,9 @@
   <script src="js/jquery.address.js"></script>
   <script>
     var map;
-    var layer;
+    var base_layer;
+    var comm_layer;
+    var parcel_layer;
     var info;
     var mapColors = [
       '#a50f15',
@@ -157,10 +159,10 @@
         [" + data_column + " > " + jenks_values[1] + "] {polygon-fill: " + mapColors[1] + ";}\
         [" + data_column + " > " + jenks_values[0] + "] {polygon-fill: " + mapColors[0] + ";}\
       }"
-      if (typeof layer !== 'undefined'){
-        map.removeLayer(layer);
+      if (typeof base_layer !== 'undefined'){
+        map.removeLayer(base_layer);
       }
-      layer = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+      base_layer = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
         attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
       }).addTo(map);
 
@@ -184,13 +186,20 @@
         this._div.innerHTML = '';
       }
       info.addTo(map);
-      var layerUrl = 'https://datamade.cartodb.com/api/v2/viz/0b2275ec-e888-11e4-8bab-0e0c41326911/viz.json';
+      var comm_layerUrl = 'https://datamade.cartodb.com/api/v2/viz/0b2275ec-e888-11e4-8bab-0e0c41326911/viz.json';
+      var parcel_layerUrl = 'https://datamade.cartodb.com/api/v2/viz/92350936-e898-11e4-8d70-0e4fddd5de28/viz.json';
 
       // change the query for the first layer
-      var subLayerOptions = {
+      var comm_subLayerOptions = {
         sql: "SELECT * FROM mil_dol_chicomm_total_by_type",
         cartocss: map_css,
         interactivity: 'distitle,total_cost,drug_cost,nonviolent_cost,violent_cost'
+      }
+
+      var parcel_subLayerOptions = {
+        sql: "SELECT * FROM mil_dol_blocks_total_by_type",
+        cartocss: map_css,
+        interactivity: 'geoid10,total_cost,drug_cost,nonviolent_cost,violent_cost'
       }
 
       var layerOpts = {
@@ -199,11 +208,12 @@
         cartodb_logo: false,
       }
 
-      cartodb.createLayer(map, layerUrl)
+      if (typeof comm_layer === 'undefined') {
+        comm_layer = cartodb.createLayer(map, comm_layerUrl)
         .addTo(map)
         .done(function(layer) {
           var sublayer = layer.getSubLayer(0);
-          sublayer.set(subLayerOptions);
+          sublayer.set(comm_subLayerOptions);
           sublayer.setInteraction(true);
           sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex){
               $('#cartodb-map div').css('cursor','pointer');
@@ -220,6 +230,43 @@
         }).on('error', function() {
           //log the error
         });
+      }
+
+      if (typeof parcel_layer === 'undefined') {
+        parcel_layer = cartodb.createLayer(map, parcel_layerUrl)
+        .addTo(map)
+        .done(function(layer) {
+          var sublayer = layer.getSubLayer(0);
+          sublayer.set(parcel_subLayerOptions);
+          sublayer.setInteraction(true);
+          sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex){
+              $('#cartodb-map div').css('cursor','pointer');
+              info.update(data);
+          })
+          sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex){
+              $('#cartodb-map div').css('cursor','inherit');
+              info.clear();
+          })
+          sublayer.on('featureClick', function(e, pos, latlng, data){
+              console.log(e)
+              console.log(data);
+          })
+        }).on('error', function() {
+          //log the error
+        });
+      }
+
+      // map.on('zoomend', function(e){
+      //   if (typeof parcel_layer !== 'undefined'){
+      //     if (map.getZoom() >= 14 ){
+      //         map.removeLayer(comm_layer)
+      //         map.addLayer(parcel_layer)
+      //     } else {
+      //         map.addLayer(comm_layer)
+      //         map.removeLayer(parcel_layer)
+      //     }
+      //   }
+      // });
     }
 
     $(window).resize(function () {
