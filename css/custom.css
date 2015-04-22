@@ -33,3 +33,23 @@ table tr.even, table tr.alt, table tr:nth-of-type(even) {
 table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, table tbody tr td, table tr td {
   display: table-cell;
 }
+
+#menu { position: absolute; top: 5px; right: 10px; width: 400px; height:60px; background: transparent; z-index:10;}
+#menu a { 
+  margin: 15px 10px 0 0;
+  float: right;
+  vertical-align: baseline;
+  padding: 10px;
+  text-align: center;
+  line-height: normal;
+  color: #555;
+  border-radius: 4px;
+  border: 1px solid #777777;
+  background: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+#menu a.selected,
+#menu a:hover { 
+  color: #F84F40;
+}
