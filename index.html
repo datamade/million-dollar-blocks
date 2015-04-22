@@ -55,7 +55,14 @@
           Perhaps this section of the page can be a <a href="http://getbootstrap.com/javascript/#carousel" target="blank">slideshow</a> with arrows to take you through
           a narrative, while map remains on left. Maybe even some interactive zooming, if we
           go down the route of exploring particular blocks/neighborhoods (i.e. zoom to relevant area
-          on left when on a given 'slide' on right).
+          on left when on a given 'slide' on right).</p>
+
+        <ul>
+          <li><a href='/#/?type=all' rel="address:/?type=all">All crimes</a></li>
+          <li><a href='/#/?type=drug' rel="address:/?type=drug">Drug related</a></li>
+          <li><a href='/#/?type=violent' rel="address:/?type=violent">Violent</a></li>
+          <li><a href='/#/?type=nonviolent' rel="address:/?type=nonviolent">Nonviolent</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -63,33 +70,105 @@
   <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
   <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
   <script src="js/accounting.min.js"></script>
+  <script src="js/jquery.address.js"></script>
   <script>
     var map;
+    var layer;
+    var info;
+    var mapColors = [
+      '#a50f15',
+      '#de2d26',
+      '#fb6a4a',
+      '#fcae91',
+      '#fee5d9'
+    ];
+
+    var commAreaTotal = [
+      292506638.00,
+      159211446.00,
+      103827021.00,
+      40812087.00,
+      1238123.00
+    ];
+
+    var commAreaNonviolent = [
+      54310585.00,
+      28117076.00,
+      15046737.00,
+      6392911.00,
+      719085.00
+    ];
+
+    var commAreaViolent = [
+      105575382.00,
+      56782734.00,
+      26092813.00,
+      9832279.00,
+      116435.00
+    ];
+
+    var commAreaDrug = [
+      132620671.00,
+      91139090.00,
+      41372510.00,
+      11930226.00,
+      40051.00
+    ];
+
     function init(){
       // initiate leaflet map
-      map = new L.Map('cartodb-map', {
-        center: [41.8417, -87.6791],
-        zoom: 12
-      });
+      if (map === undefined){
+        map = new L.Map('cartodb-map', {
+          center: [41.8417, -87.6791],
+          zoom: 10
+        });
+      }
 
-      var hash = new L.Hash(map);
+      var jenks_values = commAreaTotal;
+      var data_column = 'total_cost';
+      var type_name = 'Total';
+      var type = $.address.parameter('type');
 
-      map_css = "\
+      if (type == 'nonviolent'){
+        data_column = 'nonviolent_cost';
+        type_name = 'Nonviolent';
+        jenks_values = commAreaNonviolent;
+      }
+      else if (type == 'violent'){
+        data_column = 'violent_cost';
+        type_name = 'Violent';
+        jenks_values = commAreaViolent;
+      }
+      else if (type == 'drug'){
+        data_column = 'drug_cost';
+        type_name = 'Drug-related';
+        jenks_values = commAreaDrug;
+      }
+
+      // var hash = new L.Hash(map);
+
+      var map_css = "\
       #mil_dol_blocks_total{\
-        polygon-opacity: 0.6;\
-        [total_cost < 349952] {polygon-opacity: 0;}\
-        [total_cost >= 349952] {polygon-fill: #fcae91;}\
-        [total_cost >= 1043340] {polygon-fill: #fb6a4a;}\
-        [total_cost >= 3618559] {polygon-fill: #de2d26;}\
-        [total_cost >= 9752429] {polygon-fill: #a50f15; line-width: 6;line-color: #a50f15; line-opacity: 0.6; }\
+        polygon-opacity: 0.8;\
+        line-color: #333;\
+        [" + data_column + " >= " + jenks_values[4] + "] {polygon-fill: " + mapColors[3] + ";}\
+        [" + data_column + " > " + jenks_values[3] + "] {polygon-fill: " + mapColors[3] + ";}\
+        [" + data_column + " > " + jenks_values[2] + "] {polygon-fill: " + mapColors[2] + ";}\
+        [" + data_column + " > " + jenks_values[1] + "] {polygon-fill: " + mapColors[1] + ";}\
+        [" + data_column + " > " + jenks_values[0] + "] {polygon-fill: " + mapColors[0] + ";}\
       }"
-
-      //L.tileLayer('http://b.tile.stamen.com/toner/{z}/{x}/{y}.png', {
-        L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+      if (typeof layer !== 'undefined'){
+        map.removeLayer(layer);
+      }
+      layer = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
         attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
       }).addTo(map);
 
-      var info = L.control({position: 'bottomright'});
+      if (typeof info !== 'undefined'){
+        info.removeFrom(map);
+      }
+
+      info = L.control({position: 'bottomright'});
       info.onAdd = function(map){
         this._div = L.DomUtil.create('div', 'info');
         this.update();
@@ -97,7 +176,7 @@
       }
       info.update = function(props){
         if (typeof props !== 'undefined'){
-          var info = '<h4>Cost: ' + accounting.formatMoney(props.total_cost, '$', 0) + '</h4>';
+          var info = '<h4>'+ type_name + ' cost: ' + accounting.formatMoney(props.total_cost, '$', 0) + '</h4>';
           this._div.innerHTML = info;
         }
       }
@@ -105,13 +184,13 @@
         this._div.innerHTML = '';
       }
       info.addTo(map);
-      var layerUrl = 'http://datamade.cartodb.com/api/v2/viz/a7ae2e2e-cd12-11e4-81e2-0e018d66dc29/viz.json';
+      var layerUrl = 'https://datamade.cartodb.com/api/v2/viz/0b2275ec-e888-11e4-8bab-0e0c41326911/viz.json';
 
       // change the query for the first layer
       var subLayerOptions = {
-        sql: "SELECT * FROM mil_dol_blocks_total",
+        sql: "SELECT * FROM mil_dol_chicomm_total_by_type",
         cartocss: map_css,
-        interactivity: 'geoid10,total_cost,cases'
+        interactivity: 'distitle,total_cost,drug_cost,nonviolent_cost,violent_cost'
       }
 
       var layerOpts = {
@@ -151,6 +230,10 @@
 
     $(function() {
       init();
+
+      $.address.change(function(event) {  
+        init(); 
+      });  
     });
   </script>
 
