@@ -42,14 +42,15 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
   padding: 10px;
   text-align: center;
   line-height: normal;
-  color: #555;
+  color: #fff;
   border-radius: 4px;
   border: 1px solid #777777;
-  background: #ffffff;
+  background: #375A7F;
   text-decoration: none;
   cursor: pointer;
 }
 #menu a.selected,
 #menu a:hover { 
-  color: #F84F40;
+  background-color: #28415B;
+  border: 1px solid #aaa;
 }
