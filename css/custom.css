@@ -51,6 +51,6 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
 }
 #menu a.selected,
 #menu a:hover { 
-  background-color: #28415B;
+  background-color: #182838;
   border: 1px solid #aaa;
 }
