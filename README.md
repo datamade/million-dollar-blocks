@@ -32,7 +32,7 @@ We used the following open source tools:
 ## Errors / Bugs
 
 If something is not behaving intuitively, it is a bug, and should be reported.
-Report it here: https://github.com/datamade/eitc-map/issues
+Report it here: https://github.com/datamade/million-dollar-blocks/issues
 
 ## Note on Patches/Pull Requests
  
