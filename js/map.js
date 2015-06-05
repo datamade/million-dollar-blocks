@@ -205,7 +205,7 @@ function toggleLayers(){
 
 $(window).resize(function () {
   var h = $(window).height(),
-  offsetTop = 85; // Calculate the top offset
+  offsetTop = 105; // Calculate the top offset
   $('#cartodb-map').css('height', (h - offsetTop));
 }).resize();
 

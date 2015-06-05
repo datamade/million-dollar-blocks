@@ -4,6 +4,14 @@ body {
   font-size: 16px;
 }
 
+a {
+  color: #de2d26;
+}
+
+a:active, a:hover, a:focus {
+  color: #de2d26;
+}
+
 .info.leaflet-control {
     font-family:'Montserrat',sans-serif;
     background-color: #fff;
