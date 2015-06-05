@@ -19,9 +19,9 @@ var commAreaViolent = [ 105575382.00, 56782734.00, 26092813.00, 9832279.00, 1164
 var commAreaDrug = [ 132620671.00, 91139090.00, 41372510.00, 11930226.00, 40051.00 ];
 
 var parcelTotal = [ 16512329.00, 3829048.00, 1314546.00, 426732.00, 14.00 ];
-var parcelNonviolent = [ 6988883.00, 1899220.00, 597267.00, 168647.00, 0.00 ];
-var parcelViolent = [ 5187690.00, 1889079.00, 663269.00, 176069.00, 0.00 ];
-var parcelDrug = [ 2003918.00, 727010.00, 304011.00, 92846.00, 0.00 ];
+var parcelNonviolent = [ 6988883.00, 1899220.00, 597267.00, 168647.00, 1.00 ];
+var parcelViolent = [ 5187690.00, 1889079.00, 663269.00, 176069.00, 1.00 ];
+var parcelDrug = [ 2003918.00, 727010.00, 304011.00, 92846.00, 1.00 ];
 
 function init(type){
   // initiate leaflet map
@@ -59,7 +59,7 @@ function init(type){
   var hash = new L.Hash(map);
 
   if (typeof base_layer === 'undefined'){
-    base_layer = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+    base_layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
       attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
     }).addTo(map);
   }
@@ -93,7 +93,7 @@ function init(type){
 
   var map_commarea_css = "\
   #mil_dol_blocks_total{\
-    polygon-opacity: 0.8;\
+    polygon-opacity: 0.9;\
     line-color: #333;\
     [" + data_column + " >= " + jenks_values_commarea[4] + "] {polygon-fill: " + mapColors[3] + ";}\
     [" + data_column + " > " + jenks_values_commarea[3] + "] {polygon-fill: " + mapColors[3] + ";}\
@@ -112,11 +112,11 @@ function init(type){
   var map_parcel_css = "\
   #mil_dol_blocks_total{\
     line-color: #999; line-width: 0.2;\
-    [" + data_column + " >= " + jenks_values_parcel[4] + "] {polygon-fill: " + mapColors[3] + "; polygon-opacity: 0.1;}\
-    [" + data_column + " > " + jenks_values_parcel[3] + "] {polygon-fill: " + mapColors[3] + "; polygon-opacity: 0.6;}\
-    [" + data_column + " > " + jenks_values_parcel[2] + "] {polygon-fill: " + mapColors[2] + "; polygon-opacity: 0.7;}\
-    [" + data_column + " > " + jenks_values_parcel[1] + "] {polygon-fill: " + mapColors[1] + "; polygon-opacity: 0.8;}\
-    [" + data_column + " > " + jenks_values_parcel[0] + "] {polygon-fill: " + mapColors[0] + "; polygon-opacity: 0.9; line-color: " + mapColors[0] + "; line-width: 1;}\
+    [" + data_column + " >= " + jenks_values_parcel[4] + "] {polygon-fill: " + mapColors[3] + "; polygon-opacity: 0.3;}\
+    [" + data_column + " > " + jenks_values_parcel[3] + "] {polygon-fill: " + mapColors[3] + "; polygon-opacity: 0.9;}\
+    [" + data_column + " > " + jenks_values_parcel[2] + "] {polygon-fill: " + mapColors[2] + "; polygon-opacity: 0.9;}\
+    [" + data_column + " > " + jenks_values_parcel[1] + "] {polygon-fill: " + mapColors[1] + "; polygon-opacity: 0.9;}\
+    [" + data_column + " > " + jenks_values_parcel[0] + "] {polygon-fill: " + mapColors[0] + "; polygon-opacity: 0.9; line-color: " + mapColors[0] + "; line-width: 2;}\
   }";
 
   var parcel_subLayerOptions = {
