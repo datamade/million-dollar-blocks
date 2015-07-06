@@ -3,6 +3,7 @@
 body {
   font-size: 16px;
   background-color: #242426;
+  position: relative;
 }
 
 a {
@@ -28,6 +29,19 @@ a:active, a:hover, a:focus {
 .navbar-default {
   background-color: #57080b;
   margin-bottom: 0px;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  background-color: #a50f15;
+}
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color: #a50f15;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #E26043;
+}
+.navbar-header > a.navbar-brand:hover{
+  color: #E26043;
 }
 
 .no-padding{
@@ -81,5 +95,5 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
 
 .scroll {
   height: 550px;
-  overflow: auto;
+  overflow-y: scroll;
 }
