@@ -4,6 +4,7 @@ body {
   font-size: 16px;
   background-color: #242426;
   position: relative;
+  font-weight: 300;
 }
 
 a {
@@ -12,6 +13,17 @@ a {
 
 a:active, a:hover, a:focus {
   color: #de2d26;
+}
+
+h1, h2{
+  font-family: 'Alegreya', serif;
+  color: #e77960;
+}
+
+h3, h4, .h3, .h4 {
+  font-family: 'Alegreya', serif;
+  font-style: italic;
+  color: #e8b19c;
 }
 
 .info.leaflet-control {
@@ -38,10 +50,10 @@ a:active, a:hover, a:focus {
   background-color: #a50f15;
 }
 .navbar-default .navbar-nav > li > a:hover {
-  color: #E26043;
+  color: #e77960;
 }
 .navbar-header > a.navbar-brand:hover{
-  color: #E26043;
+  color: #e77960;
 }
 
 .no-padding{
