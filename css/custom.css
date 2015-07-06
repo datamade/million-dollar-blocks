@@ -69,3 +69,8 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
   border: 1px solid #aaa;
   color: #fff;
 }
+
+.scroll {
+  height: 550px;
+  overflow: auto;
+}
