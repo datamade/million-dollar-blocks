@@ -7,10 +7,10 @@ git clone git@github.com:datamade/million-dollar-blocks.git
 cd million-dollar-blocks
 
 # to run locally
-python -m SimpleHTTPServer
+jekyll serve
 ```
 
-navigate to http://localhost:8000/
+navigate to http://localhost:5000/
 
 # Data
 
