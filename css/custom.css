@@ -39,7 +39,7 @@ h3, h4, .h3, .h4 {
 }
 
 .navbar-default {
-  background-color: #57080b;
+  background-color: #0D0D0D;
   margin-bottom: 0px;
 }
 
@@ -54,6 +54,9 @@ h3, h4, .h3, .h4 {
 }
 .navbar-header > a.navbar-brand:hover{
   color: #e77960;
+}
+.navbar-brand{
+  font-family: 'Alegreya', serif;
 }
 
 .no-padding{
