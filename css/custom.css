@@ -2,6 +2,7 @@
 
 body {
   font-size: 16px;
+  background-color: #242426;
 }
 
 a {
@@ -24,7 +25,15 @@ a:active, a:hover, a:focus {
     border-radius: 5px;
 }
 
-.navbar-default { background-color: #a50f15; }
+.navbar-default {
+  background-color: #57080b;
+  margin-bottom: 0px;
+}
+
+.no-padding{
+  padding-left: 0px;
+  padding-right: 0px;
+}
 
 .info h4 {
   font-size: 18px;
