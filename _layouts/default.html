@@ -148,6 +148,16 @@
     $('#cartodb-map').animate({ marginLeft: '-=1000'}, 0)
                     .delay(600)
                     .animate({ marginLeft: '+=1000'}, 1200);
+    $(function () {
+      var $element = $('#scroll-arrow');
+      setInterval(function () {
+        $element.fadeIn(0, function () {
+          $element.fadeOut(800, function () {
+            $element.fadeIn(800)
+          });
+        });
+      }, 1600);
+    });
   </script>
 </body>
 </html>

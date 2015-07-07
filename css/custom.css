@@ -141,3 +141,11 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
 .popover.top > .arrow {
   bottom: -10px;
 }
+
+#scroll-arrow{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1.4em;
+  color: #E77960;
+}
