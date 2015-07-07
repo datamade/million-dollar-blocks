@@ -27,15 +27,14 @@ h3, h4, .h3, .h4 {
 }
 
 .info.leaflet-control {
-    font-family:'Montserrat',sans-serif;
-    background-color: #fff;
+    background-color: RGBA(255, 255, 255, .7);
+    color: #333;
     padding: 0 10px;
-    -moz-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
-    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    min-width: 200px;
+}
+
+.info.leaflet-control > h4 {
+  font-style: normal;
 }
 
 .navbar-default {

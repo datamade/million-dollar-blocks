@@ -78,9 +78,9 @@ function init(type){
     var info;
     if (typeof props !== 'undefined'){
       if (props['distitle'])
-        info = '<h4>'+ props['distitle'] + "<br />" + type_name + ' cost: ' + accounting.formatMoney(props[data_column], '$', 0) + '</h4>';
+        info = '<h4>'+ props['distitle'] + "<br />" + type_name + ' cost: <span class="pull-right">' + accounting.formatMoney(props[data_column], '$', 0) + '</span></h4>';
       else
-        info = '<h4>'+ type_name + ' cost: ' + accounting.formatMoney(props[data_column], '$', 0) + '</h4>';
+        info = '<h4>'+ type_name + ' cost: <span class="pull-right">' + accounting.formatMoney(props[data_column], '$', 0) + '</span></h4>';
       this._div.innerHTML = info;
     }
   }
