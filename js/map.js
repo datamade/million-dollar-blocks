@@ -60,7 +60,7 @@ function init(type){
 
   if (typeof base_layer === 'undefined'){
     base_layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-      attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+      attribution: '<a href="http://mapbox.com/about/maps" target="_blank">Mapbox</a>'
     }).addTo(map);
   }
 

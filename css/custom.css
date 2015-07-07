@@ -105,6 +105,14 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
   color: #fff;
 }
 
+.leaflet-container .leaflet-control-attribution {
+  background: rgba(0,0,0,.4);
+  color: #ccc;
+}
+.leaflet-container .leaflet-control-attribution a {
+  color: #ccc;
+}
+
 .scroll {
   height: 550px;
   overflow-y: scroll;
