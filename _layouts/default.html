@@ -144,6 +144,10 @@
   <script>
     $('body').scrollspy({ target: '#sections' })
     $('[data-toggle="popover"]').popover({'trigger':'hover'})
+
+    $('#cartodb-map').animate({ marginLeft: '-=1000'}, 0)
+                    .delay(600)
+                    .animate({ marginLeft: '+=1000'}, 1200);
   </script>
 </body>
 </html>
