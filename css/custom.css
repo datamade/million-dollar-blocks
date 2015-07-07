@@ -109,3 +109,27 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
   height: 550px;
   overflow-y: scroll;
 }
+
+.citation {
+  vertical-align: super;
+  background-color: #A50F15;
+  font-size: .6em;
+  padding-left: 3px;
+  padding-right: 3px;
+  cursor: pointer;
+}
+
+.popover-content {
+  padding: 3px;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  color: #333;
+  background: #E8B19C;
+}
+
+.popover.top > .arrow::after {
+  border-top-color: #E8B19C;
+}
+.popover.top > .arrow {
+  bottom: -10px;
+}
