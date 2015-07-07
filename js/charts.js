@@ -6,7 +6,7 @@ $(function () {
             height: 200
         },
         title: {
-            text: '$10+ MILLION DOLLAR BLOCKS',
+            text: 'Community Areas with the Highest Spending',
             y: 20,
             floating: true,
             style: {
@@ -16,7 +16,7 @@ $(function () {
             }
         },
         subtitle: {
-            text: 'city blocks with the highest incarceration spending, 2005-2009',
+            text: 'Drug-Related Incarceration, 2005-2009',
             y: 40,
             floating: true,
             style: {
@@ -29,9 +29,21 @@ $(function () {
             enabled: false
         },
         xAxis: {
-            categories: ['1', '2', '3', '4', '5'],
+            categories: [   'Austin',
+                            'Humboldt Park',
+                            'North Lawndale',
+                            'West Englewood',
+                            'Roseland',
+                            'East Garfield Park'
+                        ],
             title: {
                 text: null
+            },
+            labels: {
+                style: {
+                    'font-family': '"Lato", sans-serif',
+                    'color': '#E8B19C'
+                }
             },
             lineWidth: 0,
             tickWidth: 0
@@ -55,8 +67,13 @@ $(function () {
             column: {
                 dataLabels: {
                     enabled: true,
-                    format: '${y}',
-                    color: '#fff',
+                    //format: '${y}',
+                    formatter: function () {
+                        var s = '$<strong>' + Math.round(this.y / 1000000) + '</strong> mil';
+
+                        return s;
+                    },
+                    color: '#E8B19C',
                     inside: true,
                     verticalAlign: 'top',
                     style:{
@@ -75,7 +92,7 @@ $(function () {
         },
         series: [{
             name: 'Spending',
-            data: [30541828, 16512329, 11599530, 11496630, 11060265, 10484710]
+            data: [550234592, 292506638, 240683262, 197168151, 159211446, 158354002]
         }]
     });
 });
