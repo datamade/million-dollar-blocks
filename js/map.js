@@ -27,8 +27,8 @@ function init(type){
   // initiate leaflet map
   if (map === undefined){
     map = new L.Map('cartodb-map', {
-      center: [41.8417, -87.6791],
-      zoom: 10
+      center: [41.8501, -87.6913],
+      zoom: 12
     });
   }
 
