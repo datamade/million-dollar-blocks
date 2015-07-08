@@ -177,6 +177,24 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
   .mobile-only {
     display: inline;
   }
+  
+  .navbar-default .navbar-nav > li {
+    display: inline-block;
+    list-style-type: none;
+  }
+  .navbar-default .navbar-nav > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .navbar-default .navbar-nav > .active > a {
+    background-color: #0D0D0D;
+    color: #e77960;
+  }
+  .navbar-header > a.navbar-brand {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 30px;
+  }
 }
 
 /* lil screens */
