@@ -160,8 +160,9 @@
     });
 
     $( "#content" ).scroll(function() {
-      console.log("scroll")
-      $( "#scroll-arrow" ).fadeOut(800).remove();
+      $( "#scroll-arrow" ).fadeOut(800, function(){
+        this.remove();
+      });
     });
   </script>
 </body>

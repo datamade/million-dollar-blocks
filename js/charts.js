@@ -16,7 +16,7 @@ $(function () {
             }
         },
         subtitle: {
-            text: 'Drug-Related Incarceration, 2005-2009',
+            text: 'Millions Committed to Incarceration, 2005-2009',
             y: 40,
             floating: true,
             style: {

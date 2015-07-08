@@ -211,7 +211,7 @@ $(window).resize(function () {
 }).resize();
 
 $(function() {
-  init('total');
+  init('drug');
 
   $('.button').click(function() {
     $('.button').removeClass('selected');
