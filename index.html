@@ -3,13 +3,13 @@ layout: default
 ---
 
 <div class="col-sm-5 no-padding">
-  <div id="cartodb-map"></div>
-  <div id='menu'>
+  <div id="cartodb-map" class="desktop-only"></div>
+  <div id='menu' class="desktop-only">
     <a href="#drug" id="drug" class="selected button drug">Drug-related</a>
     <a href="#total" id="total" class="button total">All offenses</a>
   </div>
 </div>
-<div id="scroll-arrow">
+<div id="scroll-arrow" class="desktop-only">
   <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
 </div>
 <div id="content" class="col-sm-7 scroll" data-spy="scroll" data-target="#navbar">
@@ -63,6 +63,10 @@ layout: default
       </div>
     </div>
     <br>
+    <div class="mobile-only">
+      <a href='/map.html' class="btn btn-danger">Explore map of spending by block</a>
+      <br><br>
+    </div>
     <p>
       This is wasteful spending at its worst, especially given that research has shown that incarceration does not necessarily reduce crime in neighborhoods.
     </p>

@@ -162,3 +162,24 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
   line-height: 1.2;
   font-weight: 700;
 }
+
+.mobile-only {
+  display: none;
+}
+
+
+/* medium screens */
+@media only screen and (max-width : 770px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: inline;
+  }
+}
+
+/* lil screens */
+@media only screen and (max-width : 380px) {
+
+}
