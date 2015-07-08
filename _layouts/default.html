@@ -158,6 +158,11 @@
         });
       }, 1600);
     });
+
+    $( "#content" ).scroll(function() {
+      console.log("scroll")
+      $( "#scroll-arrow" ).fadeOut(800).remove();
+    });
   </script>
 </body>
 </html>
