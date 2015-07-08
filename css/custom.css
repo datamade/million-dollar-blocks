@@ -149,3 +149,8 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
   font-size: 1.4em;
   color: #E77960;
 }
+
+.text-emphasis {
+  color: #e77960;
+  font-size: 2.4em;
+}
