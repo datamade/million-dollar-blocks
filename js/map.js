@@ -207,6 +207,7 @@ $(window).resize(function () {
   var h = $(window).height(),
   offsetTop = 105; // Calculate the top offset
   $('#cartodb-map').css('height', (h - offsetTop));
+  $('#content').css('height', (h - offsetTop));
 }).resize();
 
 $(function() {
