@@ -61,8 +61,11 @@ $(function () {
         tooltip: {
             valuePrefix: '$',
             borderWidth: 0,
-            borderRadius: 0
-        },
+            borderRadius: 0,
+            formatter: function() {
+                return '$'+commaSeparateNumber(this.y);
+            }
+        }, 
         plotOptions: {
             column: {
                 dataLabels: {
@@ -96,3 +99,10 @@ $(function () {
         }]
     });
 });
+
+function commaSeparateNumber(val){
+    while (/(\d+)(\d{3})/.test(val.toString())){
+      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+    }
+    return val;
+}

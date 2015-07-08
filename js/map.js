@@ -28,7 +28,8 @@ function init(type){
   if (map === undefined){
     map = new L.Map('cartodb-map', {
       center: [41.8650, -87.6656],
-      zoom: 12
+      zoom: 12,
+      scrollWheelZoom: false
     });
   }
 
