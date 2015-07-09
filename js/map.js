@@ -73,6 +73,7 @@ function init(type){
   info.onAdd = function(map){
     this._div = L.DomUtil.create('div', 'info');
     this.update();
+    this._div.innerHTML = '<h5><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> <span class="desktop-only">hover over</span><span class="mobile-only">tap on</span> blocks to see spending</h5>';
     return this._div;
   }
   info.update = function(props){
@@ -86,7 +87,7 @@ function init(type){
     }
   }
   info.clear = function(){
-    this._div.innerHTML = '';
+    this._div.innerHTML = '<h5><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> <span class="desktop-only">hover over</span><span class="mobile-only">tap on</span> blocks to see spending</h5>';
   }
   info.addTo(map);
   var comm_layerUrl = 'https://datamade.cartodb.com/api/v2/viz/0b2275ec-e888-11e4-8bab-0e0c41326911/viz.json';

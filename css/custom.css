@@ -21,7 +21,7 @@ h1, h2{
   color: #e77960;
 }
 
-h3, h4, .h3, .h4 {
+h3, h4, h5, .h3, .h4, .h5 {
   font-family: 'Alegreya', serif;
   font-style: italic;
   color: #e8b19c;
@@ -36,11 +36,13 @@ h3, h4, .h3, .h4 {
     background-color: RGBA(255, 255, 255, .7);
     color: #333;
     padding: 0 10px;
-    min-width: 200px;
+    min-width: 250px;
+    min-height: 42px;
 }
 
-.info.leaflet-control > h4 {
+.info.leaflet-control > h4, .info.leaflet-control > h5 {
   font-style: normal;
+  color: #333;
 }
 
 .navbar-default {
