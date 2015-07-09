@@ -5,6 +5,7 @@ body {
   background-color: #242426;
   position: relative;
   font-weight: 300;
+  color: #ddd;
 }
 
 a {
@@ -26,6 +27,11 @@ h3, h4, .h3, .h4 {
   color: #e8b19c;
 }
 
+.intro-blurb {
+  font-family: 'Alegreya', serif;
+  color: #e8b19c;
+}
+
 .info.leaflet-control {
     background-color: RGBA(255, 255, 255, .7);
     color: #333;
@@ -44,9 +50,14 @@ h3, h4, .h3, .h4 {
 
 .navbar-default .navbar-nav > .active > a {
   background-color: #a50f15;
+  color: #ddd;
 }
 .navbar-default .navbar-nav > .active > a:hover {
   background-color: #a50f15;
+  color: #ddd;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #ddd;
 }
 .navbar-default .navbar-nav > li > a:hover {
   color: #e77960;
@@ -54,8 +65,9 @@ h3, h4, .h3, .h4 {
 .navbar-header > a.navbar-brand:hover{
   color: #e77960;
 }
-.navbar-brand{
+.navbar-header > .navbar-brand{
   font-family: 'Alegreya', serif;
+  color: #ddd;
 }
 
 .no-padding{
@@ -66,23 +78,6 @@ h3, h4, .h3, .h4 {
 .info h4 {
   font-size: 18px;
   color: #777;
-}
-
-table {
-  background: #fff;
-  border: solid 1px #ddd;
-}
-
-table tr th, table tr td {
-  color: #222;
-  text-align: left;
-  padding: 5px 7px;
-}
-table tr.even, table tr.alt, table tr:nth-of-type(even) {
-  background: #f9f9f9;
-}
-table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, table tbody tr td, table tr td {
-  display: table-cell;
 }
 
 #menu { position: absolute; top: 5px; right: 10px; width: 400px; height:60px; background: transparent; z-index:10;}
@@ -102,7 +97,7 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
 #menu a.selected,
 #menu a:hover { 
   border: 3px solid #E8B19C;
-  color: #fff;
+  color: #ddd;
 }
 
 .leaflet-container .leaflet-control-attribution {
@@ -161,7 +156,7 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
 }
 
 .text-small {
-  color: #999;
+  color: #777;
   font-size: .9em;
   line-height: 1.2;
   font-weight: 700;
