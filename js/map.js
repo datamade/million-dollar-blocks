@@ -148,6 +148,10 @@ function init(type){
           $('#cartodb-map div').css('cursor','inherit');
           info.clear();
       })
+      comm_sublayer.on('featureClick', function(e, latlng, pos, data, subLayerIndex){
+          $('#cartodb-map div').css('cursor','pointer');
+          info.update(data);
+      })
       comm_sublayer.on('featureClick', function(e, pos, latlng, data){
           map.setZoomAround(latlng, 13);
       })
@@ -170,6 +174,10 @@ function init(type){
       parcel_sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex){
           $('#cartodb-map div').css('cursor','inherit');
           info.clear();
+      })
+      parcel_sublayer.on('featureClick', function(e, latlng, pos, data, subLayerIndex){
+          $('#cartodb-map div').css('cursor','pointer');
+          info.update(data);
       })
       parcel_sublayer.on('featureClick', function(e, pos, latlng, data){
           // console.log(e)
