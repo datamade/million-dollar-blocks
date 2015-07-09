@@ -120,7 +120,7 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
 
 .citation {
   vertical-align: super;
-  background-color: #A50F15;
+  background-color: #e77960;
   font-size: .6em;
   padding-left: 3px;
   padding-right: 3px;
@@ -163,10 +163,20 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
   font-weight: 700;
 }
 
+.btn-danger {
+  background-color: #A50F15;
+  border-radius: 0px;
+  border: 0px;
+  font-weight: 300;
+}
+
+.btn-danger:hover, .btn-danger:active {
+  background-color: #E77960;
+}
+
 .mobile-only {
   display: none;
 }
-
 
 /* medium screens */
 @media only screen and (max-width : 770px) {
@@ -192,7 +202,7 @@ table thead tr th, table tfoot tr th, table tfoot tr td, table tbody tr th, tabl
     padding-right: 3px;
     font-size: .8em;
   }
-  .navbar-default .navbar-nav > .active > a {
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:active {
     background-color: #0D0D0D;
     color: #e77960;
   }
