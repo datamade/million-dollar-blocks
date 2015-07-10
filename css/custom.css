@@ -168,7 +168,7 @@ ul {
   list-style-position: inside;
 }
 
-ul > li {
+#content ul > li {
   list-style-type: square;
   margin-bottom: 8px;
 }
@@ -211,6 +211,9 @@ ul > li {
   #map-nav {
     display: inline-block;
     margin-left: 15px;
+  }
+  #pink-nav{
+    color: #e77960;
   }
   .navbar-nav {
     margin-top: 0px;

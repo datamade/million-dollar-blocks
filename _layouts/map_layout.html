@@ -118,13 +118,13 @@
       </div>
       <div id="navbar">
         <ul id="sections" class="nav navbar-nav">
-          <li><a href="#section-1">Intro</a></li>
-          <li><a href="#section-2">Alternatives</a></li>
-          <li><a href="#section-3">Evidence</a></li>
-          <li><a href="#section-4">About</a></li>
+          <li><a href="/#section-1">Intro</a></li>
+          <li><a href="/#section-2">Alternatives</a></li>
+          <li><a href="/#section-3">Evidence</a></li>
+          <li><a href="/#section-4">About</a></li>
         </ul>
         <ul id="map-nav" class="nav navbar-nav mobile-only">
-          <li><a href="/map.html"><strong>Map</strong></a></li>
+          <li><a href="/map.html" id="pink-nav"><strong>Map</strong></a></li>
         </ul>
 
       </div><!--/.nav-collapse -->
@@ -139,28 +139,7 @@
 
   <script src="js/analytics_lib.js"></script>
   <script>
-    $('body').scrollspy({ target: '#sections' })
-    $('.citation').popover({ html : true })
 
-    $('#cartodb-map').animate({ marginLeft: '-=1000'}, 0)
-                    .delay(600)
-                    .animate({ marginLeft: '+=1000'}, 1200);
-    $(function () {
-      var $element = $('#scroll-arrow');
-      setInterval(function () {
-        $element.fadeIn(0, function () {
-          $element.fadeOut(800, function () {
-            $element.fadeIn(800)
-          });
-        });
-      }, 1600);
-    });
-
-    $( "#content" ).scroll(function() {
-      $( "#scroll-arrow" ).fadeOut(800, function(){
-        this.remove();
-      });
-    });
   </script>
 </body>
 </html>
