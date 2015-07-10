@@ -174,14 +174,16 @@ ul > li {
 }
 
 .btn-danger {
-  background-color: #A50F15;
+  background-color: #ddd;
   border-radius: 0px;
   border: 0px;
   font-weight: 300;
+  color: #333;
 }
 
 .btn-danger:hover, .btn-danger:active {
-  background-color: #E77960;
+  background-color: #eee;
+  color: #333;
 }
 
 .mobile-only {
@@ -244,6 +246,21 @@ ul > li {
   .text-small {
     font-size: .7em;
   }
+
+  #map-image {
+    width:100%;
+    height:200px; 
+    background-image: url('/images/map.png');
+    background-size:cover;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  #map-button {
+    text-align:center;
+    margin-top: 80px;
+  }
+
+
 }
 
 /* lil screens */
