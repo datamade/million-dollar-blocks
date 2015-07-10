@@ -5,25 +5,9 @@ $(function () {
             backgroundColor: null,
             height: 200
         },
-        title: {
-            text: 'Community Areas with the Highest Spending',
-            y: 20,
-            floating: true,
-            style: {
-                'font-family': '"Lato", sans-serif',
-                'color': '#E8B19C',
-                'font-size': '1.6em'
-            }
-        },
-        subtitle: {
-            text: 'Millions Committed to Incarceration, 2005-2009',
-            y: 40,
-            floating: true,
-            style: {
-                'font-family': '"Lato", sans-serif',
-                'color': '#E8B19C',
-                'font-size': '1.2em'
-            }
+        title:{
+            text: '',
+            margin: 0
         },
         legend: {
             enabled: false
@@ -33,8 +17,7 @@ $(function () {
                             'Humboldt Park',
                             'North Lawndale',
                             'West Englewood',
-                            'Roseland',
-                            'East Garfield Park'
+                            'Roseland'
                         ],
             title: {
                 text: null
@@ -72,7 +55,7 @@ $(function () {
                     enabled: true,
                     //format: '${y}',
                     formatter: function () {
-                        var s = '$<strong>' + Math.round(this.y / 1000000) + '</strong> mil';
+                        var s = '$<strong>' + Math.round(this.y / 1000000) + '</strong>m';
 
                         return s;
                     },
@@ -95,7 +78,7 @@ $(function () {
         },
         series: [{
             name: 'Spending',
-            data: [550234592, 292506638, 240683262, 197168151, 159211446, 158354002]
+            data: [550234592, 292506638, 240683262, 197168151, 159211446]
         }]
     });
 });

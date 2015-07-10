@@ -186,6 +186,21 @@ ul {
   color: #333;
 }
 
+#chart-title, #chart-subtitle {
+  color: #e8b19c;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  position: relative;
+  top: 30px;
+}
+#chart-title{
+  font-size: .9em;
+}
+#chart-subtitle{
+  font-size: .7em;
+}
+
 .mobile-only {
   display: none;
 }
