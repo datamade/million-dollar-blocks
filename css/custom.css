@@ -179,6 +179,14 @@ h3, h4, h5, .h3, .h4, .h5 {
   display: none;
 }
 
+#map-nav {
+  display: none;
+}
+
+#sections {
+  display: inline-block;
+}
+
 /* medium screens */
 @media only screen and (max-width : 767px) {
   .desktop-only {
@@ -189,6 +197,10 @@ h3, h4, h5, .h3, .h4, .h5 {
     display: inline;
   }
 
+  #map-nav {
+    display: inline-block;
+    margin-left: 15px;
+  }
   .navbar-nav {
     margin-top: 0px;
     margin-bottom: 0px;
@@ -200,7 +212,7 @@ h3, h4, h5, .h3, .h4, .h5 {
   .navbar-default .navbar-nav > li > a {
     padding-top: 0px;
     padding-bottom: 0px;
-    padding-right: 3px;
+    padding-right: 0px;
     font-size: .8em;
   }
   .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:active {
