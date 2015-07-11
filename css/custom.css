@@ -9,11 +9,11 @@ body {
 }
 
 a {
-  color: #de2d26;
+  color: #cc3333;
 }
 
 a:active, a:hover, a:focus {
-  color: #de2d26;
+  color: #cc3333;
 }
 
 h1, h2{
@@ -70,6 +70,7 @@ h3, h4, h5, .h3, .h4, .h5 {
 .navbar-header > .navbar-brand{
   font-family: 'Alegreya', serif;
   color: #ddd;
+  padding-top: 20.5px;
 }
 
 .no-padding{
@@ -157,7 +158,7 @@ h3, h4, h5, .h3, .h4, .h5 {
   margin-bottom: 0px;
 }
 
-.text-small {
+.text-small, .text-small i {
   color: #777;
   font-size: .9em;
   line-height: 1.2;
@@ -266,8 +267,7 @@ ul {
   }
 
   #map-image {
-    width:100%;
-    height:200px; 
+    width:100na    height:200px; 
     background-image: url('/images/map.png');
     background-size:cover;
     display: inline-block;

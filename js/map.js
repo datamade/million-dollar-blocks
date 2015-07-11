@@ -127,12 +127,6 @@ function init(type){
     interactivity: 'geoid10,total_cost,drug_cost,nonviolent_cost,violent_cost'
   }
 
-  var layerOpts = {
-    user_name: 'datamade',
-    type: 'cartodb',
-    cartodb_logo: false,
-  }
-
   if (typeof comm_layer === 'undefined'){
     comm_layer = cartodb.createLayer(map, comm_layerUrl)
     .addTo(map)
