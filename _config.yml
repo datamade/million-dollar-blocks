@@ -1,5 +1,6 @@
 port:  5000
 markdown: kramdown
+title: "Chicago's Million Dollar Blocks"
 name: "Chicago's Million Dollar Blocks"
 url: http://chicagosmilliondollarblocks.com
 encoding: utf-8
