@@ -3,9 +3,10 @@
 This is the code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). The code for the analysis behind this project is in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
 
 ## Running locally
+you must fork the repository before cloning
 
 ``` bash
-git clone git@github.com:datamade/million-dollar-blocks.git
+git clone git@github.com:YOURGITHUBUSERNAME/million-dollar-blocks.git
 cd million-dollar-blocks
 
 # to run locally
