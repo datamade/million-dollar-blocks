@@ -1,5 +1,7 @@
 # Chicago Million Dollar Blocks
 
+This is the code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). The code for the analysis behind this project is in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
+
 ## Running locally
 
 ``` bash
@@ -12,9 +14,7 @@ jekyll serve
 
 navigate to http://localhost:5000/
 
-# Data
-
-# dependencies
+## Dependencies
 We used the following open source tools:
 
 * [Bootstrap](http://getbootstrap.com/) - Responsive HTML, CSS and Javascript framework
@@ -27,19 +27,13 @@ We used the following open source tools:
 * Derek Eder - developer, content
 * Eric van Zanten - developer, GIS data merging
 * Forest Gregg - developer, data cruncher
-* Cathy Deng - developer, data cruncher 
+* Cathy Deng - designer, developer
 
-## Errors / Bugs
+## We :heart: contributions
 
-If something is not behaving intuitively, it is a bug, and should be reported.
-Report it here: https://github.com/datamade/million-dollar-blocks/issues
+If something is not behaving intuitively, or if we've made a grave grammatical error, please report it [here](https://github.com/datamade/million-dollar-blocks/issues).
 
-## Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Commit, do not mess with rakefile, version, or history.
-* Send me a pull request. Bonus points for topic branches.
+Code contributions are also welcome: fork the project, make your changes, & send a pull request!
 
 ## Copyright
 
