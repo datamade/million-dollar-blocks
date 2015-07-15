@@ -1,9 +1,11 @@
 # Chicago Million Dollar Blocks
 
+### Status: pre-launch, not yet complete
+
 This is the code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). The code for the analysis behind this project is in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
 
 ## Running locally
-you must fork the repository before cloning
+you can fork the repository before cloning if you'd like to contribute
 
 ``` bash
 git clone git@github.com:YOURGITHUBUSERNAME/million-dollar-blocks.git
