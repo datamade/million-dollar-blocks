@@ -147,15 +147,15 @@
       var $element = $('#scroll-arrow');
       setInterval(function () {
         $element.fadeIn(0, function () {
-          $element.fadeOut(800, function () {
-            $element.fadeIn(800)
+          $element.fadeOut(600, function () {
+            $element.fadeIn(600)
           });
         });
-      }, 1600);
+      }, 1200);
     });
 
     $( "#content" ).scroll(function() {
-      $( "#scroll-arrow" ).fadeOut(800, function(){
+      $( "#scroll-arrow" ).fadeOut(600, function(){
         this.remove();
       });
     });
