@@ -1,9 +1,9 @@
 port:  5000
 markdown: kramdown
 name: "Chicago's Million Dollar Blocks"
-url: http://mdb.datamade.us
+url: http://chicagosmilliondollarblocks.com
 encoding: utf-8
 timezone: America/Chicago
-description: "Every year, the State of Illinois spends an incredible amount of money on incarcerating people from Chicago's poorest neighborhoods."
+description: "Illinois allocates an incredible amount of money to incarcerate people from Chicago's poorest neighborhoods — sometimes millions for residents on individual city blocks. There are more effective ways to invest public dollars."
 gems:
   - jekyll-redirect-from
