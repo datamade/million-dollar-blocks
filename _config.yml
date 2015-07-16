@@ -7,5 +7,6 @@ url: http://chicagosmilliondollarblocks.com
 encoding: utf-8
 timezone: America/Chicago
 description: "Illinois allocates an incredible amount of money to incarcerate people from Chicago's poorest neighborhoods — sometimes millions for residents on individual city blocks. There are more effective ways to invest public dollars."
+shortdesc: "Illinois spending on incarceration, sometimes millions on individual Chicago blocks, is ineffective & costly to all. There are better ways to invest public dollars."
 gems:
   - jekyll-redirect-from
