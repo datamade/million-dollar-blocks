@@ -1,7 +1,5 @@
 # Chicago Million Dollar Blocks
 
-### Status: pre-launch, not yet complete
-
 This is the code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). The code for the analysis behind this project is in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
 
 ## Running locally
@@ -31,6 +29,8 @@ We used the following open source tools:
 * Eric van Zanten - developer, GIS data merging
 * Forest Gregg - developer, data cruncher
 * Cathy Deng - designer, developer
+
+Thanks to the folks who helped review this, including: the INN Nerds, Hannah Chung, Pat Sier, Christopher Kelly, Yuanqi Wang, Brian Goggin, Sarah Bump, Joel Inwood
 
 ## We :heart: contributions
 
