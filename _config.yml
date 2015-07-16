@@ -1,7 +1,7 @@
 port:  5000
 markdown: kramdown
 title: "Chicago's Million Dollar Blocks"
-name: "DataMade"
+name: "Chicago's Million Dollar Blocks"
 url: http://chicagosmilliondollarblocks.com
 encoding: utf-8
 timezone: America/Chicago
