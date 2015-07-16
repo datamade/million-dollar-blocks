@@ -267,7 +267,8 @@ ul {
   }
 
   #map-image {
-    width:100na    height:200px; 
+    width:100%;
+    height:200px; 
     background-image: url('/images/map.png');
     background-size:cover;
     display: inline-block;

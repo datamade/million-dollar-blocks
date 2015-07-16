@@ -25,7 +25,8 @@ $(function () {
             labels: {
                 style: {
                     'font-family': '"Lato", sans-serif',
-                    'color': '#E8B19C'
+                    'color': '#E8B19C',
+                    'font-size': '.85em'
                 }
             },
             lineWidth: 0,
