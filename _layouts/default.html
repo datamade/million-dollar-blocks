@@ -155,6 +155,23 @@
         this.remove();
       });
     });
+
+    $(document).ready( function() {
+      /* Check width on page load*/
+      if ( $(window).width() < 768) {
+        $('#content').removeClass('scroll');
+      }
+    });
+
+    $(window).resize(function() {
+      /*If browser resized, check width again */
+      if ($(window).width() < 768) {
+        $('#content').removeClass('scroll');
+      }
+      else {
+        $('#content').addClass('scroll');
+      }
+    });
   </script>
 </body>
 </html>
