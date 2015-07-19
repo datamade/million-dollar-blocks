@@ -160,6 +160,7 @@
       /* Check width on page load*/
       if ( $(window).width() < 768) {
         $('#content').removeClass('scroll');
+        $( "#scroll-arrow" ).remove();
       }
     });
 
@@ -167,6 +168,7 @@
       /*If browser resized, check width again */
       if ($(window).width() < 768) {
         $('#content').removeClass('scroll');
+        $( "#scroll-arrow" ).remove();
       }
       else {
         $('#content').addClass('scroll');
