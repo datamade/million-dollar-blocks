@@ -168,12 +168,16 @@
 
 
     $('#button-yes').click(function() {
-      $('#question').hide()
-      $('#answer-yes').show()
+
+      $('#question').fadeOut(400, function () {
+        $('#answer-yes').fadeIn(400)
+      });
+
     });
     $('#button-no').click(function() {
-      $('#question').hide()
-      $('#answer-no').show()
+      $('#question').fadeOut(400, function () {
+        $('#answer-no').fadeIn(400)
+      });
     });
 
   </script>
