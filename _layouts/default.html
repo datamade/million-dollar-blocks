@@ -161,6 +161,19 @@
       if ( $(window).width() < 768) {
         $( "#scroll-arrow" ).remove();
       }
+
+      $('#answer-yes').hide()
+      $('#answer-no').hide()
+    });
+
+
+    $('#button-yes').click(function() {
+      $('#question').hide()
+      $('#answer-yes').show()
+    });
+    $('#button-no').click(function() {
+      $('#question').hide()
+      $('#answer-no').show()
     });
 
   </script>
