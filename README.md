@@ -32,6 +32,10 @@ We used the following open source tools:
 
 Thanks to the folks who helped review this, including: the INN Nerds, Hannah Chung, Pat Sier, Christopher Kelly, Yuanqi Wang, Brian Goggin, Sarah Bump, Joel Inwood
 
+## Credits
+
+The original idea and concept for [Million Dollar Blocks](http://www.spatialinformationdesignlab.org/projects.php%3Fid%3D16) came from Laura Kurgan at the [Spatial Information Design Lab](http://www.spatialinformationdesignlab.org/) in collaboration with the [Justice Mapping Center](http://www.justicemapping.org/) in 2006. This project builds on top of their visionary work.
+
 ## We :heart: contributions
 
 If something is not behaving intuitively, or if we've made a grave grammatical error, please report it [here](https://github.com/datamade/million-dollar-blocks/issues).
