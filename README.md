@@ -29,6 +29,8 @@ We used the following open source tools:
 * Eric van Zanten - developer, GIS data merging
 * Forest Gregg - developer, data cruncher
 * Cathy Deng - designer, developer
+* Dr. Cooper - Co-Executive Director of the Institute of Social Exclusion at Adler University
+* Dr. Ryan Lugalia-Hollon - writer and strategist.
 
 Thanks to the folks who helped review this, including: the INN Nerds, Hannah Chung, Pat Sier, Christopher Kelly, Yuanqi Wang, Brian Goggin, Sarah Bump, Joel Inwood
 
