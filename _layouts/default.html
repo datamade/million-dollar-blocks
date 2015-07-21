@@ -168,13 +168,14 @@
 
 
     $('#button-yes').click(function() {
-
+      _trackClickEventWithGA("WasThisCompelling", "Click", "Yes");
       $('#question').fadeOut(400, function () {
         $('#answer-yes').fadeIn(400)
       });
 
     });
     $('#button-no').click(function() {
+      _trackClickEventWithGA("WasThisCompelling", "Click", "No");
       $('#question').fadeOut(400, function () {
         $('#answer-no').fadeIn(400)
       });
