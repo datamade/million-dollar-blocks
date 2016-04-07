@@ -26,7 +26,7 @@ We used the following open source tools:
 ## Team
 
 * Derek Eder - developer, content
-* Eric van Zanten - developer, GIS data
+* Eric van Zanten - developer, GIS data merging
 * Forest Gregg - developer, data cruncher
 * Cathy Deng - designer, developer
 * Dr. Cooper - Co-Executive Director of the Institute of Social Exclusion at Adler University
