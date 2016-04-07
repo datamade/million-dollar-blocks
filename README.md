@@ -46,4 +46,4 @@ Code contributions are also welcome: fork the project, make your changes, & send
 
 ## Copyright
 
-Copyright (c) 2015 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/master/LICENSE).
+Copyright (c) 2016 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/master/LICENSE).
