@@ -1,19 +1,22 @@
 # Chicago Million Dollar Blocks
 
-This is the code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). The code for the analysis behind this project is in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
+This repo contains code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). This project depends on analysis of incarceration spending in Chicago: code for that analysis resides in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
 
-## Running locally
-you can fork the repository before cloning if you'd like to contribute
+## Setup
+Fork the repository, then clone it to your local machine.
 
 ``` bash
 git clone git@github.com:YOURGITHUBUSERNAME/million-dollar-blocks.git
 cd million-dollar-blocks
-
-# to run locally
-jekyll serve
 ```
 
-navigate to http://localhost:5000/
+We built this site with [Jekyll](https://jekyllrb.com/). Install it:
+
+```bash
+gem install jekyll bundler
+```
+
+Then, navigate to http://localhost:5000/.
 
 ## Dependencies
 We used the following open source tools:
@@ -38,12 +41,17 @@ Thanks to the folks who helped review this, including: the INN Nerds, Hannah Chu
 
 The original idea and concept for [Million Dollar Blocks](http://www.spatialinformationdesignlab.org/projects.php%3Fid%3D16) came from Laura Kurgan at the [Spatial Information Design Lab](http://www.spatialinformationdesignlab.org/) in collaboration with the [Justice Mapping Center](http://www.justicemapping.org/) in 2006. This project builds on top of their visionary work.
 
-## We :heart: contributions
+## Patches and Pull Requests
 
-If something is not behaving intuitively, or if we've made a grave grammatical error, please report it [here](https://github.com/datamade/million-dollar-blocks/issues).
+We welcome your ideas! You can make suggestions in the form of [github issues](https://github.com/datamade/million-dollar-blocks/issues) (bug reports, feature requests, general questions), or you can submit a code contribution via a pull request.
 
-Code contributions are also welcome: fork the project, make your changes, & send a pull request!
+How to contribute code:
+
+- Fork the project.
+- Make your feature addition or bug fix.
+- Send us a pull request with a description of your work! Don't worry if it isn't perfect - think of a PR as a start of a conversation, rather than a finished product.
 
 ## Copyright
 
 Copyright (c) 2016 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/master/LICENSE).
+
