@@ -1,9 +1,9 @@
 # Chicago Million Dollar Blocks
 
-This repo contains code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). This project depends on analysis of incarceration spending in Chicago: code for that analysis resides in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
+This repo contains code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). This project relies on analysis of incarceration spending in Chicago, which you can find in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
 
 ## Setup
-Fork the repository, then clone it to your local machine.
+Fork the repository, and then clone it to your local machine.
 
 ``` bash
 git clone git@github.com:YOURGITHUBUSERNAME/million-dollar-blocks.git
