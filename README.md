@@ -28,11 +28,11 @@ We used the following open source tools:
 
 ## Team
 
-* Derek Eder - developer, content
-* Eric van Zanten - developer, GIS data
-* Forest Gregg - developer, data cruncher
-* Cathy Deng - designer, developer
-* Dr. Cooper - Co-Executive Director of the Institute of Social Exclusion at Adler University
+* Forest Gregg, DataMade - developer, data cruncher
+* Cathy Deng, DataMade - designer, developer
+* Eric van Zanten, DataMade - developer, GIS data
+* Derek Eder, DataMade - developer, content
+* Dr. Dan Cooper, Adler University - writer and strategist
 * Dr. Ryan Lugalia-Hollon - writer and strategist
 
 Thanks to the folks who helped review this, including: the INN Nerds, Hannah Chung, Pat Sier, Christopher Kelly, Yuanqi Wang, Brian Goggin, Sarah Bump, Joel Inwood
