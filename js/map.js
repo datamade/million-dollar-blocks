@@ -126,7 +126,7 @@ function init(type){
   }
 
   if (typeof comm_layer === 'undefined'){
-    comm_layer = cartodb.createLayer(map, comm_layerUrl)
+    comm_layer = cartodb.createLayer(map, comm_layerUrl, { https: true })
     .addTo(map)
     .done(function(layer) {
       comm_sublayer = layer.getSubLayer(0);
@@ -153,7 +153,7 @@ function init(type){
   }
 
   if (typeof parcel_layer === 'undefined'){
-    parcel_layer = cartodb.createLayer(map, parcel_layerUrl)
+    parcel_layer = cartodb.createLayer(map, parcel_layerUrl, { https: true })
     .addTo(map)
     .done(function(layer) {
       parcel_sublayer = layer.getSubLayer(0);
