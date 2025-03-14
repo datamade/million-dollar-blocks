@@ -6,7 +6,7 @@ This repo contains code for the Chicago Million Dollar Blocks [website](https://
 Fork the repository, and then clone it to your local machine.
 
 ``` bash
-git clone git@github.com:YOURGITHUBUSERNAME/million-dollar-blocks.git
+git clone git@github.com:datamade/million-dollar-blocks.git
 cd million-dollar-blocks
 ```
 
@@ -53,5 +53,5 @@ How to contribute code:
 
 ## Copyright
 
-Copyright (c) 2016 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/master/LICENSE).
+Copyright (c) 2025 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/master/LICENSE).
 
