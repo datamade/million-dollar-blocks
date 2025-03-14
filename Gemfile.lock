@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     colorator (0.1)
     ffi (1.9.14)
@@ -37,3 +37,6 @@ PLATFORMS
 DEPENDENCIES
   jekyll (= 3.1.6)
   jekyll-redirect-from
+
+BUNDLED WITH
+   1.11.2

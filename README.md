@@ -1,6 +1,6 @@
 # Chicago Million Dollar Blocks
 
-This repo contains code for the Chicago Million Dollar Blocks [website](http://chicagosmilliondollarblocks.com/). This project relies on analysis of incarceration spending in Chicago, which you can find in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
+This repo contains code for the Chicago Million Dollar Blocks [website](https://chicagosmilliondollarblocks.com/). This project relies on analysis of incarceration spending in Chicago, which you can find in the [million-dollar-blocks-analysis](https://github.com/datamade/million-dollar-blocks-analysis) repo.
 
 ## Setup
 Fork the repository, and then clone it to your local machine.
@@ -21,8 +21,8 @@ Then, navigate to http://localhost:5000/.
 ## Dependencies
 We used the following open source tools:
 
-* [Bootstrap](http://getbootstrap.com/) - Responsive HTML, CSS and Javascript framework
-* [Leaflet](http://leafletjs.com/) - javascript library interactive maps
+* [Bootstrap](https://getbootstrap.com/) - Responsive HTML, CSS and Javascript framework
+* [Leaflet](https://leafletjs.com/) - javascript library interactive maps
 * [jQuery Address](https://github.com/asual/jquery-address) - javascript library creating RESTful URLs
 * [GitHub pages](https://pages.github.com/) - free static website hosting
 
@@ -39,7 +39,7 @@ Thanks to the folks who helped review this, including: the INN Nerds, Hannah Chu
 
 ## Credits
 
-The original idea and concept for [Million Dollar Blocks](http://www.spatialinformationdesignlab.org/projects.php%3Fid%3D16) came from Laura Kurgan at the [Spatial Information Design Lab](http://www.spatialinformationdesignlab.org/) in collaboration with the [Justice Mapping Center](http://www.justicemapping.org/) in 2006. This project builds on top of their visionary work.
+The original idea and concept for [Million Dollar Blocks](https://www.spatialinformationdesignlab.org/projects.php%3Fid%3D16) came from Laura Kurgan at the [Spatial Information Design Lab](https://www.spatialinformationdesignlab.org/) in collaboration with the [Justice Mapping Center](https://www.justicemapping.org/) in 2006. This project builds on top of their visionary work.
 
 ## Patches and Pull Requests
 
