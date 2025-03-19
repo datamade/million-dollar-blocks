@@ -79,24 +79,23 @@
   <link href='/favicon.ico' rel='shortcut icon' />
 
   <title>Chicago's Million Dollar Blocks</title>
-  <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
   <link rel="stylesheet" href="css/bootstrap.darkly.min.css" />
+  <link rel="stylesheet" href="css/maplibre-gl.css" />
   <link rel="stylesheet" href="css/custom.css" />
 
   <link href='https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700' rel='stylesheet' type='text/css'>
 
-  <script src="js/jquery-1.10.1.min.js"></script>
+  <script src="js/jquery-3.7.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/highcharts.js"></script>
 
-  <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+  <script src="js/maplibre-gl.js"></script>
   <script src="js/accounting.min.js"></script>
   <script src="js/jquery.address.js"></script>
   
   <style>
     html, body {width:100%; height:100%; padding: 0; margin: 0;}
-    #cartodb-map { width: 100%; height:100%; background: black;}
+    #map { width: 100%; height:100%; background: black;}
   </style>
 </head>
 
@@ -110,10 +109,10 @@
       </div>
       <div id="navbar">
         <ul id="sections" class="nav navbar-nav">
-          <li><a href="#section-1">Intro</a></li>
-          <li><a href="#section-2">Alternatives</a></li>
-          <li><a href="#section-3">Evidence</a></li>
-          <li><a href="#section-4">About</a></li>
+          <li><a href="/#section-1">Intro</a></li>
+          <li><a href="/#section-2">Alternatives</a></li>
+          <li><a href="/#section-3">Evidence</a></li>
+          <li><a href="/#section-4">About</a></li>
           <li><a href="/map.html"><span class="desktop-only">Full </span>Map</a></li>
         </ul>
 
@@ -132,7 +131,7 @@
     $('body').scrollspy({ target: '#sections' })
     $('.citation').popover({ html : true })
 
-    $('#cartodb-map').animate({ marginLeft: '-=1000'}, 0)
+    $('#map').animate({ marginLeft: '-=1000'}, 0)
                     .delay(600)
                     .animate({ marginLeft: '+=1000'}, 1200);
     $(function () {

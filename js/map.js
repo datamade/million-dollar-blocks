@@ -24,180 +24,181 @@ var parcelViolent = [ 5187690.00, 1889079.00, 663269.00, 176069.00, 1.00 ];
 var parcelDrug = [ 2003918.00, 727010.00, 304011.00, 92846.00, 1.00 ];
 
 function init(type){
-  // initiate leaflet map
-  if (map === undefined){
-    map = new L.Map('cartodb-map', {
-      center: [41.8650, -87.6656],
-      zoom: 12,
-      scrollWheelZoom: false
-    });
-  }
+  // initiate maplibre map
+  const map = new maplibregl.Map({
+    container: 'map', // container id
+    style: 'https://demotiles.maplibre.org/style.json', // style URL
+    center: [-87.6656, 41.8650], // starting position [lng, lat]
+    zoom: 7 // starting zoom
+  })
 
-  var jenks_values_commarea = commAreaTotal;
-  var jenks_values_parcel = parcelTotal;
-  var data_column = 'total_cost';
-  var type_name = 'Total';
+  console.log(map)
 
-  if (type == 'nonviolent'){
-    data_column = 'nonviolent_cost';
-    type_name = 'Nonviolent';
-    jenks_values_commarea = commAreaNonviolent;
-    jenks_values_parcel = parcelNonviolent;
-  }
-  else if (type == 'violent'){
-    data_column = 'violent_cost';
-    type_name = 'Violent';
-    jenks_values_commarea = commAreaViolent;
-    jenks_values_parcel = parcelViolent;
-  }
-  else if (type == 'drug'){
-    data_column = 'drug_cost';
-    type_name = 'Drug-related';
-    jenks_values_commarea = commAreaDrug;
-    jenks_values_parcel = parcelDrug;
-  }
+  // var jenks_values_commarea = commAreaTotal;
+  // var jenks_values_parcel = parcelTotal;
+  // var data_column = 'total_cost';
+  // var type_name = 'Total';
 
-  if (typeof base_layer === 'undefined'){
-    base_layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://mapbox.com/about/maps" target="_blank">Mapbox</a>'
-    }).addTo(map);
-  }
+  // if (type == 'nonviolent'){
+  //   data_column = 'nonviolent_cost';
+  //   type_name = 'Nonviolent';
+  //   jenks_values_commarea = commAreaNonviolent;
+  //   jenks_values_parcel = parcelNonviolent;
+  // }
+  // else if (type == 'violent'){
+  //   data_column = 'violent_cost';
+  //   type_name = 'Violent';
+  //   jenks_values_commarea = commAreaViolent;
+  //   jenks_values_parcel = parcelViolent;
+  // }
+  // else if (type == 'drug'){
+  //   data_column = 'drug_cost';
+  //   type_name = 'Drug-related';
+  //   jenks_values_commarea = commAreaDrug;
+  //   jenks_values_parcel = parcelDrug;
+  // }
 
-  if (typeof info !== 'undefined'){
-    info.removeFrom(map);
-  }
+  // if (typeof base_layer === 'undefined'){
+  //   base_layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+  //     attribution: '<a href="https://mapbox.com/about/maps" target="_blank">Mapbox</a>'
+  //   }).addTo(map);
+  // }
 
-  info = L.control({position: 'bottomright'});
-  info.onAdd = function(map){
-    this._div = L.DomUtil.create('div', 'info');
-    this.update();
-    this._div.innerHTML = '<h5><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> <span class="desktop-only">hover over</span><span class="mobile-only">tap on</span> blocks to see spending</h5>';
-    return this._div;
-  }
-  info.update = function(props){
-    var info;
-    if (typeof props !== 'undefined'){
-      if (props['distitle'])
-        info = '<h4>'+ props['distitle'] + "<br />" + type_name + ' cost: <span class="pull-right">' + accounting.formatMoney(props[data_column], '$', 0) + '</span></h4>';
-      else
-        info = '<h4>'+ type_name + ' cost: <span class="pull-right">' + accounting.formatMoney(props[data_column], '$', 0) + '</span></h4>';
-      this._div.innerHTML = info;
-    }
-  }
-  info.clear = function(){
-    this._div.innerHTML = '<h5><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> <span class="desktop-only">hover over</span><span class="mobile-only">tap on</span> blocks to see spending</h5>';
-  }
-  info.addTo(map);
-  var comm_layerUrl = 'https://datamade.cartodb.com/api/v2/viz/0b2275ec-e888-11e4-8bab-0e0c41326911/viz.json';
-  var parcel_layerUrl = 'https://datamade.cartodb.com/api/v2/viz/92350936-e898-11e4-8d70-0e4fddd5de28/viz.json';
+  // if (typeof info !== 'undefined'){
+  //   info.removeFrom(map);
+  // }
 
-  var map_commarea_css = "\
-  #mil_dol_blocks_total{\
-    polygon-opacity: 0.9;\
-    line-color: #333;\
-    [" + data_column + " >= " + jenks_values_commarea[4] + "] {polygon-fill: " + mapColors[3] + ";}\
-    [" + data_column + " > " + jenks_values_commarea[3] + "] {polygon-fill: " + mapColors[3] + ";}\
-    [" + data_column + " > " + jenks_values_commarea[2] + "] {polygon-fill: " + mapColors[2] + ";}\
-    [" + data_column + " > " + jenks_values_commarea[1] + "] {polygon-fill: " + mapColors[1] + ";}\
-    [" + data_column + " > " + jenks_values_commarea[0] + "] {polygon-fill: " + mapColors[0] + ";}\
-  }";
+  // info = L.control({position: 'bottomright'});
+  // info.onAdd = function(map){
+  //   this._div = L.DomUtil.create('div', 'info');
+  //   this.update();
+  //   this._div.innerHTML = '<h5><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> <span class="desktop-only">hover over</span><span class="mobile-only">tap on</span> blocks to see spending</h5>';
+  //   return this._div;
+  // }
+  // info.update = function(props){
+  //   var info;
+  //   if (typeof props !== 'undefined'){
+  //     if (props['distitle'])
+  //       info = '<h4>'+ props['distitle'] + "<br />" + type_name + ' cost: <span class="pull-right">' + accounting.formatMoney(props[data_column], '$', 0) + '</span></h4>';
+  //     else
+  //       info = '<h4>'+ type_name + ' cost: <span class="pull-right">' + accounting.formatMoney(props[data_column], '$', 0) + '</span></h4>';
+  //     this._div.innerHTML = info;
+  //   }
+  // }
+  // info.clear = function(){
+  //   this._div.innerHTML = '<h5><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> <span class="desktop-only">hover over</span><span class="mobile-only">tap on</span> blocks to see spending</h5>';
+  // }
+  // info.addTo(map);
+  // var comm_layerUrl = 'https://datamade.cartodb.com/api/v2/viz/0b2275ec-e888-11e4-8bab-0e0c41326911/viz.json';
+  // var parcel_layerUrl = 'https://datamade.cartodb.com/api/v2/viz/92350936-e898-11e4-8d70-0e4fddd5de28/viz.json';
 
-  // change the query for the first layer
-  var comm_subLayerOptions = {
-    sql: "SELECT * FROM mil_dol_chicomm_total_by_type",
-    cartocss: map_commarea_css,
-    interactivity: 'distitle,total_cost,drug_cost,nonviolent_cost,violent_cost'
-  }
+  // var map_commarea_css = "\
+  // #mil_dol_blocks_total{\
+  //   polygon-opacity: 0.9;\
+  //   line-color: #333;\
+  //   [" + data_column + " >= " + jenks_values_commarea[4] + "] {polygon-fill: " + mapColors[3] + ";}\
+  //   [" + data_column + " > " + jenks_values_commarea[3] + "] {polygon-fill: " + mapColors[3] + ";}\
+  //   [" + data_column + " > " + jenks_values_commarea[2] + "] {polygon-fill: " + mapColors[2] + ";}\
+  //   [" + data_column + " > " + jenks_values_commarea[1] + "] {polygon-fill: " + mapColors[1] + ";}\
+  //   [" + data_column + " > " + jenks_values_commarea[0] + "] {polygon-fill: " + mapColors[0] + ";}\
+  // }";
 
-  var map_parcel_css = "\
-  #mil_dol_blocks_total{\
-    line-color: #999; line-width: 0.2;\
-    [" + data_column + " >= " + jenks_values_parcel[4] + "] {polygon-fill: " + mapColors[3] + "; polygon-opacity: 0.3;}\
-    [" + data_column + " > " + jenks_values_parcel[3] + "] {polygon-fill: " + mapColors[3] + "; polygon-opacity: 0.9;}\
-    [" + data_column + " > " + jenks_values_parcel[2] + "] {polygon-fill: " + mapColors[2] + "; polygon-opacity: 0.9;}\
-    [" + data_column + " > " + jenks_values_parcel[1] + "] {polygon-fill: " + mapColors[1] + "; polygon-opacity: 0.9;}\
-    [" + data_column + " > " + jenks_values_parcel[0] + "] {polygon-fill: " + mapColors[0] + "; polygon-opacity: 0.9; line-color: " + mapColors[0] + "; line-width: 2;}\
-  }";
+  // // change the query for the first layer
+  // var comm_subLayerOptions = {
+  //   sql: "SELECT * FROM mil_dol_chicomm_total_by_type",
+  //   cartocss: map_commarea_css,
+  //   interactivity: 'distitle,total_cost,drug_cost,nonviolent_cost,violent_cost'
+  // }
 
-  var parcel_subLayerOptions = {
-    sql: "SELECT * FROM mil_dol_blocks_total_by_type",
-    cartocss: map_parcel_css,
-    interactivity: 'geoid10,total_cost,drug_cost,nonviolent_cost,violent_cost'
-  }
+  // var map_parcel_css = "\
+  // #mil_dol_blocks_total{\
+  //   line-color: #999; line-width: 0.2;\
+  //   [" + data_column + " >= " + jenks_values_parcel[4] + "] {polygon-fill: " + mapColors[3] + "; polygon-opacity: 0.3;}\
+  //   [" + data_column + " > " + jenks_values_parcel[3] + "] {polygon-fill: " + mapColors[3] + "; polygon-opacity: 0.9;}\
+  //   [" + data_column + " > " + jenks_values_parcel[2] + "] {polygon-fill: " + mapColors[2] + "; polygon-opacity: 0.9;}\
+  //   [" + data_column + " > " + jenks_values_parcel[1] + "] {polygon-fill: " + mapColors[1] + "; polygon-opacity: 0.9;}\
+  //   [" + data_column + " > " + jenks_values_parcel[0] + "] {polygon-fill: " + mapColors[0] + "; polygon-opacity: 0.9; line-color: " + mapColors[0] + "; line-width: 2;}\
+  // }";
 
-  if (typeof comm_layer === 'undefined'){
-    comm_layer = cartodb.createLayer(map, comm_layerUrl, { https: true })
-    .addTo(map)
-    .done(function(layer) {
-      comm_sublayer = layer.getSubLayer(0);
-      comm_sublayer.set(comm_subLayerOptions);
-      comm_sublayer.setInteraction(true);
-      comm_sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex){
-          $('#cartodb-map div').css('cursor','pointer');
-          info.update(data);
-      })
-      comm_sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex){
-          $('#cartodb-map div').css('cursor','inherit');
-          info.clear();
-      })
-      comm_sublayer.on('featureClick', function(e, latlng, pos, data, subLayerIndex){
-          $('#cartodb-map div').css('cursor','pointer');
-          info.update(data);
-      })
-      comm_sublayer.on('featureClick', function(e, pos, latlng, data){
-          map.setZoomAround(latlng, 13);
-      })
-    }).on('error', function() {
-      //log the error
-    });
-  }
+  // var parcel_subLayerOptions = {
+  //   sql: "SELECT * FROM mil_dol_blocks_total_by_type",
+  //   cartocss: map_parcel_css,
+  //   interactivity: 'geoid10,total_cost,drug_cost,nonviolent_cost,violent_cost'
+  // }
 
-  if (typeof parcel_layer === 'undefined'){
-    parcel_layer = cartodb.createLayer(map, parcel_layerUrl, { https: true })
-    .addTo(map)
-    .done(function(layer) {
-      parcel_sublayer = layer.getSubLayer(0);
-      parcel_sublayer.set(parcel_subLayerOptions);
-      parcel_sublayer.setInteraction(true);
-      parcel_sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex){
-          $('#cartodb-map div').css('cursor','pointer');
-          info.update(data);
-      })
-      parcel_sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex){
-          $('#cartodb-map div').css('cursor','inherit');
-          info.clear();
-      })
-      parcel_sublayer.on('featureClick', function(e, latlng, pos, data, subLayerIndex){
-          $('#cartodb-map div').css('cursor','pointer');
-          info.update(data);
-      })
-      parcel_sublayer.on('featureClick', function(e, pos, latlng, data){
-          // console.log(e)
-          // console.log(data);
-      })
+  // if (typeof comm_layer === 'undefined'){
+  //   comm_layer = cartodb.createLayer(map, comm_layerUrl, { https: true })
+  //   .addTo(map)
+  //   .done(function(layer) {
+  //     comm_sublayer = layer.getSubLayer(0);
+  //     comm_sublayer.set(comm_subLayerOptions);
+  //     comm_sublayer.setInteraction(true);
+  //     comm_sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex){
+  //         $('#cartodb-map div').css('cursor','pointer');
+  //         info.update(data);
+  //     })
+  //     comm_sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex){
+  //         $('#cartodb-map div').css('cursor','inherit');
+  //         info.clear();
+  //     })
+  //     comm_sublayer.on('featureClick', function(e, latlng, pos, data, subLayerIndex){
+  //         $('#cartodb-map div').css('cursor','pointer');
+  //         info.update(data);
+  //     })
+  //     comm_sublayer.on('featureClick', function(e, pos, latlng, data){
+  //         map.setZoomAround(latlng, 13);
+  //     })
+  //   }).on('error', function() {
+  //     //log the error
+  //   });
+  // }
 
-      map.on('zoomend', function(e){
-        hash = new L.Hash(map);
-        toggleLayers();
-      });
-      map.on('moveend', function(e){
-        hash = new L.Hash(map);
-      });
-      toggleLayers();
-    }).on('error', function() {
-      //log the error
-    });
-  }
+  // if (typeof parcel_layer === 'undefined'){
+  //   parcel_layer = cartodb.createLayer(map, parcel_layerUrl, { https: true })
+  //   .addTo(map)
+  //   .done(function(layer) {
+  //     parcel_sublayer = layer.getSubLayer(0);
+  //     parcel_sublayer.set(parcel_subLayerOptions);
+  //     parcel_sublayer.setInteraction(true);
+  //     parcel_sublayer.on('featureOver', function(e, latlng, pos, data, subLayerIndex){
+  //         $('#cartodb-map div').css('cursor','pointer');
+  //         info.update(data);
+  //     })
+  //     parcel_sublayer.on('featureOut', function(e, latlng, pos, data, subLayerIndex){
+  //         $('#cartodb-map div').css('cursor','inherit');
+  //         info.clear();
+  //     })
+  //     parcel_sublayer.on('featureClick', function(e, latlng, pos, data, subLayerIndex){
+  //         $('#cartodb-map div').css('cursor','pointer');
+  //         info.update(data);
+  //     })
+  //     parcel_sublayer.on('featureClick', function(e, pos, latlng, data){
+  //         // console.log(e)
+  //         // console.log(data);
+  //     })
 
-  if (typeof comm_sublayer !== 'undefined')
-    comm_sublayer.setCartoCSS(map_commarea_css);
+  //     map.on('zoomend', function(e){
+  //       hash = new L.Hash(map);
+  //       toggleLayers();
+  //     });
+  //     map.on('moveend', function(e){
+  //       hash = new L.Hash(map);
+  //     });
+  //     toggleLayers();
+  //   }).on('error', function() {
+  //     //log the error
+  //   });
+  // }
 
-  if (typeof parcel_sublayer !== 'undefined')
-    parcel_sublayer.setCartoCSS(map_parcel_css);
+  // if (typeof comm_sublayer !== 'undefined')
+  //   comm_sublayer.setCartoCSS(map_commarea_css);
+
+  // if (typeof parcel_sublayer !== 'undefined')
+  //   parcel_sublayer.setCartoCSS(map_parcel_css);
 }
 
-if (typeof hash !== 'undefined')
-  hash = new L.Hash(map);
+// if (typeof hash !== 'undefined')
+//   hash = new L.Hash(map);
 
 function toggleLayers(){
   // console.log('toggleLayers')
@@ -215,7 +216,7 @@ function toggleLayers(){
 $(window).resize(function () {
   var h = $(window).height(),
   offsetTop = 60; // Calculate the top offset
-  $('#cartodb-map').css('height', (h - offsetTop));
+  $('#map').css('height', (h - offsetTop));
   $('#content').css('height', (h - offsetTop));
 }).resize();
 

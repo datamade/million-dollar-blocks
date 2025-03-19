@@ -210,6 +210,11 @@ ul {
   display: none;
 }
 
+#map {
+  height: 100%;
+  width: 500px;
+}
+
 #map-nav {
   display: none;
 }
