@@ -6,11 +6,19 @@ const mapColors = [
   '#a50f15',
 ]
 
+const mapOpacities = [
+  0.3,
+  0.9,
+  0.9,
+  0.9,
+  0.9,
+]
+
 const geography_buckets = {
-  'blocks':           { 'total': [14, 426732, 1314546, 3829048, 16512329],
-                        'nonviolent': [1, 168647, 597267, 1899220, 6988883],
-                        'violent': [1, 176069, 663269, 1889079, 5187690],
-                        'drug': [1, 92846, 304011, 727010, 2003918] },
+  'blocks':           { 'total': [0, 426732, 1314546, 3829048, 16512329],
+                        'nonviolent': [0, 168647, 597267, 1899220, 6988883],
+                        'violent': [0, 176069, 663269, 1889079, 5187690],
+                        'drug': [0, 92846, 304011, 727010, 2003918] },
   'community-areas':  { 'total': [1238123, 40812087, 103827021, 159211446, 292506638],
                         'nonviolent': [719085, 6392911, 15046737, 28117076, 54310585],
                         'violent': [116435, 9832279, 26092813, 56782734, 105575382],
@@ -18,9 +26,10 @@ const geography_buckets = {
 }
 
 let hoveredPolygonId = null
+let selectedCategory = 'total'
 
 function getTooltip(props){
-  return '<h4>'+ props['distitle'] + '<br />Drug-related cost: <span class="pull-right">$' + props['drug_cost'].toLocaleString() + '</span></h4>'
+  return '<h4>'+ props['distitle'] + '<br />' + selectedCategory + 'cost: <span class="pull-right">$' + props[selectedCategory + '_cost'].toLocaleString() + '</span></h4>'
 }
 
 function getFillColor(layerSource, category){
@@ -31,23 +40,73 @@ function getFillColor(layerSource, category){
   for (var i = 0; i < buckets.length; i++) {
     fillColor.push(buckets[i], colors[i])
   }
-  console.log(fillColor)
   return fillColor
 }
 
-function addLayer(map, layerSource, visible = 'visible'){
+function getLineColor(layerSource, category){
+  let opacities = mapOpacities
+
+  let buckets = geography_buckets[layerSource][category]
+  let fillOpacity = ['step', ['get', category + '_cost']]
+  fillOpacity.push(opacities[0])
+  for (var i = 1; i < buckets.length; i++) {
+    fillOpacity.push(buckets[i], opacities[i])
+  }
+  return fillOpacity
+}
+
+async function loadSourceFromGzip(url, map, name) {
+  const response = await fetch(url)
+  const arrayBuffer = await response.arrayBuffer()
+  const decompressedData = pako.inflate(new Uint8Array(arrayBuffer), { to: 'string' })
+  const geojson = JSON.parse(decompressedData)
+
+  map.addSource(name, {
+    type: 'geojson',
+    data: geojson
+  })
+
+  addLayer(map, name)
+}
+
+function addLayer(map, layerSource){
+  let maxzoom = 20
+  let minzoom = 11
+  let linecolor = '#000'
+  let linewidth = 0
+  let lineopacity = 0
+  if (layerSource == 'community-areas') {
+    maxzoom = 11
+    minzoom = 1
+    linecolor = '#333'
+    linewidth = 1
+    lineopacity = 1
+  }
+
+  // polygon fill styles
   map.addLayer({
     'id': `${layerSource}-fills`,
     'type': 'fill',
     'source': layerSource, // reference the data source
-    'layout': {
-      // Make the layer not visible by default.
-      'visibility': visible
-      },
+    'maxzoom': maxzoom,
+    'minzoom': minzoom,
     'paint': {
-      'fill-color': getFillColor(layerSource, 'drug'),
-      'fill-opacity': 0.9,
-      'fill-outline-color': '#333'
+      'fill-color': getFillColor(layerSource, selectedCategory),
+      'fill-opacity': getLineColor(layerSource, selectedCategory)      
+    }
+  })
+
+  // polygon line styles
+  map.addLayer({
+    'id': `${layerSource}-outline`,
+    'type': 'line',
+    'source': layerSource, // reference the data source
+    'maxzoom': maxzoom,
+    'minzoom': minzoom,
+    'paint': {
+      'line-color': linecolor,
+      'line-width': linewidth,
+      'line-opacity': lineopacity,
     }
   })
 
@@ -65,44 +124,23 @@ function addLayer(map, layerSource, visible = 'visible'){
 }
 
 
-function init(type){
+function init(){
   // initiate maplibre map
   mapboxgl.accessToken = 'pk.eyJ1IjoiZGF0YW1hZGUiLCJhIjoiaXhhVGNrayJ9.0yaccougI3vSAnrKaB00vA';
   const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
       projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
-      zoom: 12,
+      zoom: 11,
       center: [-87.6656, 41.8650]
   });
 
   map.addControl(new mapboxgl.NavigationControl(), 'top-left');
   map.scrollZoom.disable();
 
-  var data_column = 'total_cost';
-  var type_name = 'Total';
-
-  if (type == 'nonviolent'){
-    data_column = 'nonviolent_cost';
-    type_name = 'Nonviolent';
-  }
-  else if (type == 'violent'){
-    data_column = 'violent_cost';
-    type_name = 'Violent';
-  }
-  else if (type == 'drug'){
-    data_column = 'drug_cost';
-    type_name = 'Drug-related';
-  }
-
   map.on('load', () => {
-    // load our 4 main data sources
-    map.addSource('community-areas', {
-        type: 'geojson',
-        data: '/data/mil_dol_chicomm_total_by_type.geojson'
-    })
-  
-    addLayer(map, 'community-areas')
+    loadSourceFromGzip('/data/mil_dol_blocks_total_by_type_simple.geojson.gz', map, 'blocks')
+    loadSourceFromGzip('/data/mil_dol_chicomm_total_by_type.geojson.gz', map, 'community-areas')
   })
 
   // info = L.control({position: 'bottomright'});
@@ -258,7 +296,7 @@ $(window).resize(function () {
 }).resize();
 
 $(function() {
-  init('drug');
+  init('total');
 
   $('.button').click(function() {
     $('.button').removeClass('selected');
