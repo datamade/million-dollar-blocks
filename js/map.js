@@ -1,72 +1,109 @@
-var map;
-var base_layer;
-var comm_layer;
-var comm_sublayer;
-var parcel_layer;
-var parcel_sublayer;
-var info;
-var mapColors = [
-  '#a50f15',
-  '#de2d26',
-  '#fb6a4a',
+const mapColors = [
+  '#fee5d9',
   '#fcae91',
-  '#fee5d9'
-];
+  '#fb6a4a',
+  '#de2d26',
+  '#a50f15',
+]
 
-var commAreaTotal = [ 292506638.00, 159211446.00, 103827021.00, 40812087.00, 1238123.00 ];
-var commAreaNonviolent = [ 54310585.00, 28117076.00, 15046737.00, 6392911.00, 719085.00 ];
-var commAreaViolent = [ 105575382.00, 56782734.00, 26092813.00, 9832279.00, 116435.00 ];
-var commAreaDrug = [ 132620671.00, 91139090.00, 41372510.00, 11930226.00, 40051.00 ];
+const geography_buckets = {
+  'blocks':           { 'total': [14, 426732, 1314546, 3829048, 16512329],
+                        'nonviolent': [1, 168647, 597267, 1899220, 6988883],
+                        'violent': [1, 176069, 663269, 1889079, 5187690],
+                        'drug': [1, 92846, 304011, 727010, 2003918] },
+  'community-areas':  { 'total': [1238123, 40812087, 103827021, 159211446, 292506638],
+                        'nonviolent': [719085, 6392911, 15046737, 28117076, 54310585],
+                        'violent': [116435, 9832279, 26092813, 56782734, 105575382],
+                        'drug': [40051, 11930226, 41372510, 91139090, 132620671] },
+}
 
-var parcelTotal = [ 16512329.00, 3829048.00, 1314546.00, 426732.00, 14.00 ];
-var parcelNonviolent = [ 6988883.00, 1899220.00, 597267.00, 168647.00, 1.00 ];
-var parcelViolent = [ 5187690.00, 1889079.00, 663269.00, 176069.00, 1.00 ];
-var parcelDrug = [ 2003918.00, 727010.00, 304011.00, 92846.00, 1.00 ];
+let hoveredPolygonId = null
+
+function getTooltip(props){
+  return '<h4>'+ props['distitle'] + '<br />Drug-related cost: <span class="pull-right">$' + props['drug_cost'].toLocaleString() + '</span></h4>'
+}
+
+function getFillColor(layerSource, category){
+  let colors = mapColors
+
+  let buckets = geography_buckets[layerSource][category]
+  let fillColor = ['interpolate', ['linear'], ['get', category + '_cost']]
+  for (var i = 0; i < buckets.length; i++) {
+    fillColor.push(buckets[i], colors[i])
+  }
+  console.log(fillColor)
+  return fillColor
+}
+
+function addLayer(map, layerSource, visible = 'visible'){
+  map.addLayer({
+    'id': `${layerSource}-fills`,
+    'type': 'fill',
+    'source': layerSource, // reference the data source
+    'layout': {
+      // Make the layer not visible by default.
+      'visibility': visible
+      },
+    'paint': {
+      'fill-color': getFillColor(layerSource, 'drug'),
+      'fill-opacity': 0.9,
+      'fill-outline-color': '#333'
+    }
+  })
+
+  const popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  })
+  
+  map.on('mousemove', `${layerSource}-fills`, (e) => {
+    // populate tooltip
+    map.getCanvas().style.cursor = 'pointer'
+    const coordinates = e.lngLat
+    popup.setLngLat(coordinates).setHTML(getTooltip(e.features[0].properties)).addTo(map)
+  })
+}
+
 
 function init(type){
   // initiate maplibre map
-  const map = new maplibregl.Map({
-    container: 'map', // container id
-    style: 'https://demotiles.maplibre.org/style.json', // style URL
-    center: [-87.6656, 41.8650], // starting position [lng, lat]
-    zoom: 7 // starting zoom
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZGF0YW1hZGUiLCJhIjoiaXhhVGNrayJ9.0yaccougI3vSAnrKaB00vA';
+  const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/dark-v11',
+      projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
+      zoom: 12,
+      center: [-87.6656, 41.8650]
+  });
+
+  map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+  map.scrollZoom.disable();
+
+  var data_column = 'total_cost';
+  var type_name = 'Total';
+
+  if (type == 'nonviolent'){
+    data_column = 'nonviolent_cost';
+    type_name = 'Nonviolent';
+  }
+  else if (type == 'violent'){
+    data_column = 'violent_cost';
+    type_name = 'Violent';
+  }
+  else if (type == 'drug'){
+    data_column = 'drug_cost';
+    type_name = 'Drug-related';
+  }
+
+  map.on('load', () => {
+    // load our 4 main data sources
+    map.addSource('community-areas', {
+        type: 'geojson',
+        data: '/data/mil_dol_chicomm_total_by_type.geojson'
+    })
+  
+    addLayer(map, 'community-areas')
   })
-
-  console.log(map)
-
-  // var jenks_values_commarea = commAreaTotal;
-  // var jenks_values_parcel = parcelTotal;
-  // var data_column = 'total_cost';
-  // var type_name = 'Total';
-
-  // if (type == 'nonviolent'){
-  //   data_column = 'nonviolent_cost';
-  //   type_name = 'Nonviolent';
-  //   jenks_values_commarea = commAreaNonviolent;
-  //   jenks_values_parcel = parcelNonviolent;
-  // }
-  // else if (type == 'violent'){
-  //   data_column = 'violent_cost';
-  //   type_name = 'Violent';
-  //   jenks_values_commarea = commAreaViolent;
-  //   jenks_values_parcel = parcelViolent;
-  // }
-  // else if (type == 'drug'){
-  //   data_column = 'drug_cost';
-  //   type_name = 'Drug-related';
-  //   jenks_values_commarea = commAreaDrug;
-  //   jenks_values_parcel = parcelDrug;
-  // }
-
-  // if (typeof base_layer === 'undefined'){
-  //   base_layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-  //     attribution: '<a href="https://mapbox.com/about/maps" target="_blank">Mapbox</a>'
-  //   }).addTo(map);
-  // }
-
-  // if (typeof info !== 'undefined'){
-  //   info.removeFrom(map);
-  // }
 
   // info = L.control({position: 'bottomright'});
   // info.onAdd = function(map){
