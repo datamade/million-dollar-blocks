@@ -136,7 +136,7 @@ function init(){
       projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
       zoom: 11,
       center: [-87.6656, 41.8650]
-  });
+  })
 
   map.addControl(new mapboxgl.NavigationControl(), 'top-left')
   map.scrollZoom.disable()
@@ -149,10 +149,10 @@ function init(){
 
 $(window).resize(function () {
   var h = $(window).height(),
-  offsetTop = 60; // Calculate the top offset
+  offsetTop = 60 // Calculate the top offset
   $('#map').css('height', (h - offsetTop))
   $('#content').css('height', (h - offsetTop))
-}).resize();
+}).resize()
 
 $(function() {
   init(selectedCategory)
