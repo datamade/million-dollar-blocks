@@ -27,11 +27,26 @@ const geography_buckets = {
 }
 
 let map = null
-let hoveredPolygonId = null
+let infoWindowControl = null
+const infoWindowDefaultContent = '<h5><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> <span class="desktop-only">hover over</span><span class="mobile-only">tap on</span> blocks to see spending</h5>'
 let selectedCategory = 'drug'
 
-function getTooltip(props){
-  return '<h4>'+ props['distitle'] + '<br />' + selectedCategory + 'cost: <span class="pull-right">$' + props[selectedCategory + '_cost'].toLocaleString() + '</span></h4>'
+class InfoWindowControl {
+  onAdd(map) {
+    this.map = map
+    this.container = document.createElement('div')
+    this.container.id = 'info'
+    return this.container
+  }
+
+  onRemove() {
+    this.container.parentNode.removeChild(this.container);
+    this.map = undefined;
+  }
+
+  updateContent(content) {
+    this.container.innerHTML = content;
+  }
 }
 
 function getFillColor(layerSource, category){
@@ -119,16 +134,26 @@ function addLayer(map, layerSource){
     }
   })
 
-  const popup = new maplibregl.Popup({
-    closeButton: false,
-    closeOnClick: false
-  })
-  
   map.on('mousemove', `${layerSource}-fills`, (e) => {
-    // populate tooltip
     map.getCanvas().style.cursor = 'pointer'
-    const coordinates = e.lngLat
-    popup.setLngLat(coordinates).setHTML(getTooltip(e.features[0].properties)).addTo(map)
+    const props = e.features[0].properties
+
+    let categoryName = 'Total'
+    if (selectedCategory == 'drug')
+      categoryName = 'Drug-related'
+
+    if (props['distitle']) {
+      info = '<h4>'+ props['distitle'] + "<br />" + categoryName + ' cost: <span class="pull-right">$' + props[selectedCategory + '_cost'].toLocaleString() + '</span></h4>'
+    }
+    else {
+      info = '<h4>'+ categoryName + ' cost: <span class="pull-right">$' + props[selectedCategory + '_cost'].toLocaleString() + '</span></h4>'
+    }
+
+    infoWindowControl.updateContent(info)
+  })
+
+  map.on('mouseleave', `${layerSource}-fills`, () => {
+    infoWindowControl.updateContent(infoWindowDefaultContent)
   })
 }
 
@@ -144,6 +169,10 @@ function init(){
 
   map.addControl(new maplibregl.NavigationControl(), 'top-left')
   map.scrollZoom.disable()
+
+  infoWindowControl = new InfoWindowControl()
+  map.addControl(infoWindowControl, 'bottom-right')
+  infoWindowControl.updateContent(infoWindowDefaultContent)
 
   map.on('load', () => {
     loadSourceFromGzip('/data/mil_dol_blocks_total_by_type_simple.geojson.gz', map, 'blocks')
