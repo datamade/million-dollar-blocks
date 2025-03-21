@@ -15,6 +15,10 @@ We built this site with [Jekyll](https://jekyllrb.com/). Install it:
 ```bash
 gem install jekyll bundler
 ```
+To run the site locally: 
+```bash
+jekyll serve -w
+```
 
 Then, navigate to http://localhost:5000/.
 
@@ -22,7 +26,8 @@ Then, navigate to http://localhost:5000/.
 We used the following open source tools:
 
 * [Bootstrap](https://getbootstrap.com/) - Responsive HTML, CSS and Javascript framework
-* [Leaflet](https://leafletjs.com/) - javascript library interactive maps
+* [Maplibre-GL](https://maplibre.org/maplibre-gl-js/docs/) - javascript library interactive maps
+* [pako](https://nodeca.github.io/pako/) - for unzipping our GeoJSON map files
 * [jQuery Address](https://github.com/asual/jquery-address) - javascript library creating RESTful URLs
 * [GitHub pages](https://pages.github.com/) - free static website hosting
 
@@ -53,5 +58,5 @@ How to contribute code:
 
 ## Copyright
 
-Copyright (c) 2025 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/master/LICENSE).
-
+Copyright (c) 2025 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/main/LICENSE).
+ 
