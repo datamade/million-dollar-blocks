@@ -113,7 +113,7 @@ function addLayer(map, layerSource){
     }
   })
 
-  const popup = new mapboxgl.Popup({
+  const popup = new maplibregl.Popup({
     closeButton: false,
     closeOnClick: false
   })
@@ -129,8 +129,7 @@ function addLayer(map, layerSource){
 
 function init(){
   // initiate maplibre map
-  mapboxgl.accessToken = 'pk.eyJ1IjoiZGF0YW1hZGUiLCJhIjoiaXhhVGNrayJ9.0yaccougI3vSAnrKaB00vA'
-  const map = new mapboxgl.Map({
+  const map = new maplibregl.Map({
       container: 'map',
       style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
       projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
@@ -138,7 +137,7 @@ function init(){
       center: [-87.6656, 41.8650]
   })
 
-  map.addControl(new mapboxgl.NavigationControl(), 'top-left')
+  map.addControl(new maplibregl.NavigationControl(), 'top-left')
   map.scrollZoom.disable()
 
   map.on('load', () => {
