@@ -59,3 +59,4 @@ How to contribute code:
 ## Copyright
 
 Copyright (c) 2025 DataMade. Released under the [MIT License](https://github.com/datamade/million-dollar-blocks/blob/main/LICENSE).
+ 
