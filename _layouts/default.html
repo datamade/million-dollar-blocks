@@ -90,7 +90,6 @@
   <script src="/js/highcharts.js"></script>
 
   <script src="/js/maplibre-gl.js"></script>
-  <script src="/js/accounting.min.js"></script>
   <script src="/js/jquery.address.js"></script>
   <script src="/js/pako.min.js"></script>
   
@@ -127,56 +126,57 @@
     </div>
   </div>
 
-  <script src="js/analytics_lib.js"></script>
   <script>
     $('body').scrollspy({ target: '#sections' })
     $('.citation').popover({ html : true })
 
     $('#map').animate({ marginLeft: '-=1000'}, 0)
                     .delay(600)
-                    .animate({ marginLeft: '+=1000'}, 1200);
+                    .animate({ marginLeft: '+=1000'}, 1200)
     $(function () {
-      var $element = $('#scroll-arrow');
+      var $element = $('#scroll-arrow')
       setInterval(function () {
         $element.fadeIn(0, function () {
           $element.fadeOut(600, function () {
             $element.fadeIn(600)
-          });
-        });
-      }, 1200);
-    });
+          })
+        })
+      }, 1200)
+    })
 
     $( "#content" ).scroll(function() {
       $( "#scroll-arrow" ).fadeOut(600, function(){
-        this.remove();
-      });
-    });
+        this.remove()
+      })
+    })
 
     $(document).ready( function() {
       /* Check width on page load*/
       if ( $(window).width() < 768) {
-        $( "#scroll-arrow" ).remove();
+        $( "#scroll-arrow" ).remove()
       }
 
       $('#answer-yes').hide()
       $('#answer-no').hide()
-    });
+    })
 
-
-    $('#button-yes').click(function() {
-      _trackClickEventWithGA("WasThisCompelling", "Click", "Yes");
-      $('#question').fadeOut(400, function () {
-        $('#answer-yes').fadeIn(400)
-      });
-
-    });
-    $('#button-no').click(function() {
-      _trackClickEventWithGA("WasThisCompelling", "Click", "No");
-      $('#question').fadeOut(400, function () {
-        $('#answer-no').fadeIn(400)
-      });
-    });
-
+    // matomo analytics
+    var _paq = (window._paq = window._paq || [])
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(["trackPageView"])
+    _paq.push(["enableLinkTracking"])
+    ;(function () {
+      var u = "https://datamade.matomo.cloud/"
+      _paq.push(["setTrackerUrl", u + "matomo.php"])
+      // replace ZZZ with your site ID
+      _paq.push(["setSiteId", "15"])
+      var d = document,
+      g = d.createElement("script"),
+      s = d.getElementsByTagName("script")[0]
+      g.async = true
+      g.src = "//cdn.matomo.cloud/datamade.matomo.cloud/matomo.js"
+      s.parentNode.insertBefore(g, s)
+    })()
   </script>
 </body>
 </html>

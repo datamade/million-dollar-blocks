@@ -47,7 +47,7 @@ $(function () {
             borderWidth: 0,
             borderRadius: 0,
             formatter: function() {
-                return '$'+commaSeparateNumber(this.y);
+                return '$'+commaSeparateNumber(this.y)
             }
         }, 
         plotOptions: {
@@ -56,9 +56,8 @@ $(function () {
                     enabled: true,
                     //format: '${y}',
                     formatter: function () {
-                        var s = '$<strong>' + Math.round(this.y / 1000000) + '</strong>m';
-
-                        return s;
+                        var s = '$<strong>' + Math.round(this.y / 1000000) + '</strong>m'
+                        return s
                     },
                     color: '#E8B19C',
                     inside: true,
@@ -81,12 +80,12 @@ $(function () {
             name: 'Spending',
             data: [550234592, 292506638, 240683262, 197168151, 159211446]
         }]
-    });
-});
+    })
+})
 
 function commaSeparateNumber(val){
     while (/(\d+)(\d{3})/.test(val.toString())){
-      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2')
     }
-    return val;
+    return val
 }
