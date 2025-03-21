@@ -26,6 +26,7 @@ const geography_buckets = {
                         'drug': [40051, 11930226, 41372510, 91139090, 132620671] },
 }
 
+let map = null
 let hoveredPolygonId = null
 let selectedCategory = 'drug'
 
@@ -56,6 +57,11 @@ function getLineColor(layerSource, category){
     fillOpacity.push(buckets[i], opacities[i])
   }
   return fillOpacity
+}
+
+function updateShading(layerSource, category) {
+  map.setPaintProperty(layerSource + '-fills', 'fill-color', getFillColor(layerSource, category))
+  map.setPaintProperty(layerSource + '-fills', 'fill-opacity', getLineColor(layerSource, category))
 }
 
 async function loadSourceFromGzip(url, map, name) {
@@ -126,13 +132,12 @@ function addLayer(map, layerSource){
   })
 }
 
-
 function init(){
   // initiate maplibre map
-  const map = new maplibregl.Map({
+  map = new maplibregl.Map({
       container: 'map',
       style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
-      projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
+      projection: 'globe',
       zoom: 11,
       center: [-87.6656, 41.8650]
   })
@@ -159,6 +164,8 @@ $(function() {
   $('.button').click(function() {
     $('.button').removeClass('selected')
     $(this).addClass('selected')
-    init($(this).attr('id'))
+    selectedCategory = $(this).attr('id')
+    updateShading('blocks', selectedCategory)
+    updateShading('community-areas', selectedCategory)
   })
 })
