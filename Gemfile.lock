@@ -39,6 +39,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ffi (< 1.17.0)
   jekyll (= 3.1.6)
   jekyll-redirect-from
 
