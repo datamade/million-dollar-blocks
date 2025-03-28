@@ -79,24 +79,23 @@
   <link href='/favicon.ico' rel='shortcut icon' />
 
   <title>Chicago's Million Dollar Blocks</title>
-  <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
-  <link rel="stylesheet" href="css/bootstrap.darkly.min.css" />
-  <link rel="stylesheet" href="css/custom.css" />
+  <link rel="stylesheet" href="/css/bootstrap.darkly.min.css" />
+  <link rel="stylesheet" href="/css/maplibre-gl.css">
+  <link rel="stylesheet" href="/css/custom.css" />
 
   <link href='https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700' rel='stylesheet' type='text/css'>
 
-  <script src="js/jquery-1.10.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/highcharts.js"></script>
+  <script src="/js/jquery-3.7.1.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/highcharts.js"></script>
 
-  <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
-  <script src="js/accounting.min.js"></script>
-  <script src="js/jquery.address.js"></script>
+  <script src="/js/maplibre-gl.js"></script>
+  <script src="/js/jquery.address.js"></script>
+  <script src="/js/pako.min.js"></script>
   
   <style>
     html, body {width:100%; height:100%; padding: 0; margin: 0;}
-    #cartodb-map { width: 100%; height:100%; background: black;}
+    #map { width: 100%; height:100%; background: black;}
   </style>
 </head>
 
@@ -110,10 +109,10 @@
       </div>
       <div id="navbar">
         <ul id="sections" class="nav navbar-nav">
-          <li><a href="#section-1">Intro</a></li>
-          <li><a href="#section-2">Alternatives</a></li>
-          <li><a href="#section-3">Evidence</a></li>
-          <li><a href="#section-4">About</a></li>
+          <li><a href="/#section-1">Intro</a></li>
+          <li><a href="/#section-2">Alternatives</a></li>
+          <li><a href="/#section-3">Evidence</a></li>
+          <li><a href="/#section-4">About</a></li>
           <li><a href="/map.html"><span class="desktop-only">Full </span>Map</a></li>
         </ul>
 
@@ -127,56 +126,57 @@
     </div>
   </div>
 
-  <script src="js/analytics_lib.js"></script>
   <script>
     $('body').scrollspy({ target: '#sections' })
     $('.citation').popover({ html : true })
 
-    $('#cartodb-map').animate({ marginLeft: '-=1000'}, 0)
+    $('#map').animate({ marginLeft: '-=1000'}, 0)
                     .delay(600)
-                    .animate({ marginLeft: '+=1000'}, 1200);
+                    .animate({ marginLeft: '+=1000'}, 1200)
     $(function () {
-      var $element = $('#scroll-arrow');
+      var $element = $('#scroll-arrow')
       setInterval(function () {
         $element.fadeIn(0, function () {
           $element.fadeOut(600, function () {
             $element.fadeIn(600)
-          });
-        });
-      }, 1200);
-    });
+          })
+        })
+      }, 1200)
+    })
 
     $( "#content" ).scroll(function() {
       $( "#scroll-arrow" ).fadeOut(600, function(){
-        this.remove();
-      });
-    });
+        this.remove()
+      })
+    })
 
     $(document).ready( function() {
       /* Check width on page load*/
       if ( $(window).width() < 768) {
-        $( "#scroll-arrow" ).remove();
+        $( "#scroll-arrow" ).remove()
       }
 
       $('#answer-yes').hide()
       $('#answer-no').hide()
-    });
+    })
 
-
-    $('#button-yes').click(function() {
-      _trackClickEventWithGA("WasThisCompelling", "Click", "Yes");
-      $('#question').fadeOut(400, function () {
-        $('#answer-yes').fadeIn(400)
-      });
-
-    });
-    $('#button-no').click(function() {
-      _trackClickEventWithGA("WasThisCompelling", "Click", "No");
-      $('#question').fadeOut(400, function () {
-        $('#answer-no').fadeIn(400)
-      });
-    });
-
+    // matomo analytics
+    var _paq = (window._paq = window._paq || [])
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(["trackPageView"])
+    _paq.push(["enableLinkTracking"])
+    ;(function () {
+      var u = "https://datamade.matomo.cloud/"
+      _paq.push(["setTrackerUrl", u + "matomo.php"])
+      // replace ZZZ with your site ID
+      _paq.push(["setSiteId", "15"])
+      var d = document,
+      g = d.createElement("script"),
+      s = d.getElementsByTagName("script")[0]
+      g.async = true
+      g.src = "//cdn.matomo.cloud/datamade.matomo.cloud/matomo.js"
+      s.parentNode.insertBefore(g, s)
+    })() 
   </script>
 </body>
 </html>

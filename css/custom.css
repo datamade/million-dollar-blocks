@@ -1,7 +1,7 @@
 /* custom styles */
 
 body {
-  font-size: 16px;
+  font-size: 18px;
   background-color: #242426;
   position: relative;
   font-weight: 300;
@@ -32,17 +32,18 @@ h3, h4, h5, .h3, .h4, .h5 {
   color: #e8b19c;
 }
 
-.info.leaflet-control {
+#info {
     background-color: RGBA(255, 255, 255, .7);
-    color: #333;
-    padding: 0 10px;
+    color: #111;
+    padding: 5px 10px;
+    margin-right: 5px;
     min-width: 250px;
     min-height: 42px;
 }
 
-.info.leaflet-control > h4, .info.leaflet-control > h5 {
+#info > h4, #info > h5 {
   font-style: normal;
-  color: #333;
+  color: #111;
 }
 
 .navbar-default {
@@ -76,11 +77,6 @@ h3, h4, h5, .h3, .h4, .h5 {
 .no-padding{
   padding-left: 0px;
   padding-right: 0px;
-}
-
-.info h4 {
-  font-size: 18px;
-  color: #777;
 }
 
 #menu { position: absolute; top: 5px; right: 10px; width: 400px; height:60px; background: transparent; z-index:10;}
@@ -208,6 +204,11 @@ ul {
 
 .mobile-only {
   display: none;
+}
+
+#map {
+  height: 100%;
+  width: 500px;
 }
 
 #map-nav {
