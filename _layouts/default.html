@@ -160,23 +160,6 @@
       $('#answer-no').hide()
     })
 
-    // matomo analytics
-    var _paq = (window._paq = window._paq || [])
-    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-    _paq.push(["trackPageView"])
-    _paq.push(["enableLinkTracking"])
-    ;(function () {
-      var u = "https://datamade.matomo.cloud/"
-      _paq.push(["setTrackerUrl", u + "matomo.php"])
-      // replace ZZZ with your site ID
-      _paq.push(["setSiteId", "15"])
-      var d = document,
-      g = d.createElement("script"),
-      s = d.getElementsByTagName("script")[0]
-      g.async = true
-      g.src = "//cdn.matomo.cloud/datamade.matomo.cloud/matomo.js"
-      s.parentNode.insertBefore(g, s)
-    })() 
   </script>
 </body>
 </html>
