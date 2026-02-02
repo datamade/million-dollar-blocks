@@ -1,4 +1,4 @@
-FROM ruby:3.4
+FROM ruby:3.2
 
 COPY . /usr/local/src
 WORKDIR /usr/local/src
